@@ -5,3 +5,7 @@
 5
 6
 7
+if[
+instruccion1
+instruccion2
+]
