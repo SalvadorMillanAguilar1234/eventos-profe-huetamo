@@ -30,6 +30,24 @@ class Consultas {
             die($e->getMessage());
         }
     }
+    
+     //Registrar Usuarios
+    public function RegistrarUsuario(Elementos $datos) {
+        try {
+            $consulta = "INSERT INTO usuarios( `nombres`, `apellidos`, `celular`, `correo`, `contrasena`"
+                    . ") VALUES (?,?,?,?,?)";
+            $this->conexion->prepare($consulta)->execute(array(
+                $datos->__GET('nombres'),
+                $datos->__GET('apellidos'),
+                $datos->__GET('celular'),
+                $datos->__GET('correo'),
+                $datos->__GET('contrasena')
+              
+            ));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
     //Listar Eventos
     public function ListarEventos() {

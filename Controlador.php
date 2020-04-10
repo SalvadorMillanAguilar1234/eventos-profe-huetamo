@@ -15,6 +15,25 @@ $exR = "/^([0-9a-zA-ZáéíóúÁÉÍÓÚÑñ\-\_,#.: \s])*$/";
 
 if (isset($_REQUEST['operaciones'])) {
     switch ($_REQUEST['operaciones']) {
+        
+        case 'registrarUsuario':
+            
+             if ($verificar->verificarRegistroUsuarios($_REQUEST['inputNombres'],$_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
+            if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'],"registro.php")) {
+            $elementos->__SET('nombres', $_REQUEST['inputNombres']);
+            $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
+            $elementos->__SET('celular', $_REQUEST['inputCelular']);
+            $elementos->__SET('correo', $_REQUEST['inputCorreo']);
+            $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
+            
+           $modelo->RegistrarUsuario($elementos);
+                  
+            header('Location: login.php');
+             }
+           }
+            
+            break;
+        
         case 'registrarE':
 
             if ($verificar->verificarRE($_REQUEST['txtIdU'], $_REQUEST['txtFecha'], $_REQUEST['txtHora'], utf8_decode($_REQUEST['txtDireccion']), utf8_decode($_REQUEST['txtDescripcion']), $exR)) {
@@ -103,34 +122,70 @@ class Metodos {
             return false;
         }
     }
-
-    public function verificarPassword($pass, $rut) {
-        if (strlen($pass) < 6) {
-            echo "<script>alert('La clave debe tener al menos 6 caracteres')</script>";
-            header('Refresh: -1; URL= ' . $rut . '?error_password');
-        } else {
-            if (strlen($pass) > 16) {
-                echo "<script>alert('La clave no puede tener más de 16 caracteres')</script>";
-                header('Refresh: -1; URL= ' . $rut . '?error_password');
+    
+     public function verificarRegistroUsuarios($nombres, $apellidos, $celular, $correo, $contrasena1, $contrasena2) {
+      if (empty($nombres && $apellidos && $celular && $correo && $contrasena1 && $contrasena2)) {
+                echo '<script>alert (" Cubre los campos vacÃ­o");</script>';
             } else {
-                if (!preg_match('`[a-z]`', $pass)) {
+                if (false !== filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+                    if(is_numeric($celular)) {              
+                    if (!preg_match('`["]`', $nombres) && !preg_match('`["]`', $apellidos) && !preg_match('`["]`', $correo) && !preg_match('`["]`', $contrasena1) && !preg_match('`["]`', $contrasena2) && !preg_match("`[']`", $nombres) && !preg_match("`[']`", $apellidos) && !preg_match("`[']`", $correo) && !preg_match("`[']`", $contrasena1) && !preg_match("`[']`", $contrasena2)) {
+
+         
+                 return true;
+                        
+                        
+                        
+                   }else{
+                    echo '<script>alert ("No ingrese comillas");</script>';
+                     header('Refresh: 0; URL= registro.php?error');
+                }
+              
+                }else{
+                    echo '<script>alert ("El campo celular solo acepta numeros");</script>';
+                      header('Refresh: 0; URL= registro.php?error');
+                }
+                }else{
+                    echo '<script>alert ("Escribe un correo electronico valido");</script>';
+                     header('Refresh: 0; URL= registro.php?error');
+                }
+              
+            }
+     }
+
+    public function verificarPassword($pass1, $pass2, $rut) {
+        if ($pass1 != $pass2) {
+            echo "<script>alert('Contraseñas diferentes')</script>";
+            header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+        } else {
+            
+        if (strlen($pass1) < 6) {
+            echo "<script>alert('La clave debe tener al menos 6 caracteres')</script>";
+            header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+        } else {
+            if (strlen($pass1) > 16) {
+                echo "<script>alert('La clave no puede tener más de 16 caracteres')</script>";
+                header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+            } else {
+                if (!preg_match('`[a-z]`', $pass1)) {
                     echo "<script>alert('La clave debe tener al menos una letra minúscula')</script>";
-                    header('Refresh: -1; URL= ' . $rut . '?error_password');
+                    header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
                 } else {
-                    if (!preg_match('`[A-Z]`', $pass)) {
+                    if (!preg_match('`[A-Z]`', $pass1)) {
                         echo "<script>alert('La clave debe tener al menos una letra mayúscula')</script>";
-                        header('Refresh: -1; URL= ' . $rut . '?error_password');
+                        header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
                     } else {
-                        if (!preg_match('`[0-9]`', $pass)) {
+                        if (!preg_match('`[0-9]`', $pass1)) {
                             echo "<script>alert('La clave debe tener al menos un caracter numérico')</script>";
-                            header('Refresh: -1; URL=' . $rut . '?error_password');
+                            header('Refresh: 0; URL=' . $rut . '?error_contrasena');
                         } else {
-                            return "1";
+                            return true;
                         }
                     }
                 }
             }
         }
+    }
     }
 
 }
