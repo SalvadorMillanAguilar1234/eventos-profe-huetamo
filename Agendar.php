@@ -258,7 +258,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                         no deve superar los 240 caracteres.</p>
                                 </div>
                                 <!-- Fecha que selecciona en el calendario -->
-                                <input type="hidden"  id="txtIdU" name="txtIdU" value="2">
+                                <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios']?>">
                                 <input type="hidden"  id="txtFechaE" name="txtFechaE">
                                 <input type="hidden" name="txtIdEE" id="txtIdEE">
                                 <div v-if="<?php echo $lugV; ?> && (<?php echo $exRH; ?>|| horaE) && <?php echo $desV; ?>" class="modal-footer" style="float: right">
@@ -327,7 +327,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             </div>
                             <!-- Fecha que selecciona en el calendario -->
                             <input type="hidden"  id="txtFecha" name="txtFecha">
-                            <input type="hidden"  id="txtIdU" name="txtIdU" value="2">
+                            <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios']?>">
 
                             <div v-if="<?php echo $lugV; ?> && <?php echo $exRH; ?> && <?php echo $desV; ?>" class="modal-footer" style="float: right">
                                 <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
