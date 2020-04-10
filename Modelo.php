@@ -31,6 +31,33 @@ class Consultas {
         }
     }
     
+    //Listar Usuario iniciado sesion
+    public function ListarUsuario($idUsuarios) {
+        try {
+            $resultado = array();
+            $stm = $this->conexion->prepare("SELECT * FROM usuarios where idUsuarios= $idUsuarios");
+            $stm->execute();
+
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $row) {
+                $datos = new Elementos();
+
+                $datos->__SET('idUsuarios', $row->idUsuarios);
+                $datos->__SET('nombres', $row->nombres);
+                $datos->__SET('apellidos', $row->apellidos);
+                $datos->__SET('celular', $row->celular);
+                $datos->__SET('correo', $row->correo);
+                $datos->__SET('contrasena', $row->contrasena);
+
+                $resultado[] = $datos;
+            }
+
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    
     //************************Eventos***************************************//
     //Registrar Evento
     public function RegistrarE(Elementos $datos) {
@@ -49,6 +76,7 @@ class Consultas {
             die($e->getMessage());
         }
     }
+
     //Listar Eventos
     public function ListarEventos() {
         try {
@@ -75,7 +103,7 @@ class Consultas {
             die($e->getMessage());
         }
     }
-    
+
     //////editar Evento
     public function EditarE(Elementos $datos) {
         try {
@@ -94,7 +122,7 @@ class Consultas {
             die($e->getMessage());
         }
     }
-    
+
     //Eliminar Evento
     public function EliminarE($id) {
         try {
@@ -180,5 +208,4 @@ class Consultas {
             die($e->getMessage());
         }
     }
-
 }

@@ -11,7 +11,7 @@ $verificar = new Metodos();
 
 //Variables para validación
 //Solo se permiten letras, n&uacutemero, guiones y comas
-$exR = "/^([0-9a-zA-ZáéíóúÁÉÍÓÚÑñ\-\_,#.: \s])*$/";
+$exR = "/^([0-9a-zA-ZáéíóúÁÉÍÓÚÑñ\-\_,#.: ? \s])*$/";
 
 if (isset($_REQUEST['operaciones'])) {
     switch ($_REQUEST['operaciones']) {
@@ -115,7 +115,7 @@ if (isset($_REQUEST['operaciones'])) {
                                 $img = 2;
                             }
                         } else {
-                            $elementos->__SET('imagenP', "assets\img\prouctos\ " . $_REQUEST['txtImagenEP']);  
+                            $elementos->__SET('imagenP', "assets\img\prouctos\ " . $_REQUEST['txtImagenEP']);
                         }
                     } else {
                         unlink("assets\img\prouctos\ " . $_REQUEST['txtImagenEP']);
@@ -151,6 +151,26 @@ if (isset($_REQUEST['operaciones'])) {
                 header('Refresh: 0; URL= index.php');
             }
 
+            break;
+
+        //Cerrar sesion
+        case 'cerrarSesion':
+            session_start();
+            // Destruir todas las variables de sesión.
+            $_SESSION = array();
+
+            // Si se desea destruir la sesión completamente, borre también la cookie de sesión.
+            // Nota: ¡Esto destruirá la sesión, y no la información de la sesión!
+            if (ini_get("session.use_cookies")) {
+                $params = session_get_cookie_params();
+                setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]
+                );
+            }
+
+            unset($_SESSION);
+            // Finalmente, destruir la sesión.
+            session_destroy();
+            header('Location: index.php');
             break;
     }
 }
@@ -198,7 +218,7 @@ class Metodos {
         return false;
     }
 
-    //Metodo para permitir solo letras, n&uacutemero, guiones y comas
+    //Metodo para permitir solo se permiten letras, n&uacutemero, guiones y comas
     public function verificarRE($txtIdU, $txtFecha, $txtHora, $txtDireccion, $txtDescripcion, $ex) {
         if (!empty($txtIdU && $txtFecha && $txtHora && $txtDireccion && $txtDescripcion)) {
             if (!preg_match("/^([0-9])*$/", $txtIdU)) {
@@ -207,7 +227,7 @@ class Metodos {
                 return false;
             } else {
                 if (!preg_match($ex, $txtDireccion) || !preg_match($ex, $txtDescripcion) || !preg_match($ex, $txtFecha)) {
-                    echo "<script>alert('$txtDireccion Solo se permiten letras, n\u00FAmero, guiones y comas en el campo: direcci\u00F3n y descripcci\u00F3n del evento ')</script>";
+                    echo "<script>alert(' Solo se permiten letras, n\u00FAmero, guiones y comas en el campo: direcci\u00F3n y descripcci\u00F3n del evento ')</script>";
                     header('Refresh: 0; URL= Agendar.php');
                     return false;
                 } else {
@@ -259,34 +279,28 @@ class Metodos {
         }
     }
 
-    public function verificarPassword($pass1, $pass2, $rut) {
-        if ($pass1 != $pass2) {
-            echo "<script>alert('Contraseñas diferentes')</script>";
-            header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+    public function verificarPassword($pass, $rut) {
+        if (strlen($pass) < 6) {
+            echo "<script>alert('La clave debe tener al menos 6 caracteres')</script>";
+            header('Refresh: -1; URL= ' . $rut . '?error_password');
         } else {
-
-            if (strlen($pass1) < 6) {
-                echo "<script>alert('La clave debe tener al menos 6 caracteres')</script>";
-                header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+            if (strlen($pass) > 16) {
+                echo "<script>alert('La clave no puede tener más de 16 caracteres')</script>";
+                header('Refresh: -1; URL= ' . $rut . '?error_password');
             } else {
-                if (strlen($pass1) > 16) {
-                    echo "<script>alert('La clave no puede tener más de 16 caracteres')</script>";
-                    header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+                if (!preg_match('`[a-z]`', $pass)) {
+                    echo "<script>alert('La clave debe tener al menos una letra minúscula')</script>";
+                    header('Refresh: -1; URL= ' . $rut . '?error_password');
                 } else {
-                    if (!preg_match('`[a-z]`', $pass1)) {
-                        echo "<script>alert('La clave debe tener al menos una letra minúscula')</script>";
-                        header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+                    if (!preg_match('`[A-Z]`', $pass)) {
+                        echo "<script>alert('La clave debe tener al menos una letra mayúscula')</script>";
+                        header('Refresh: -1; URL= ' . $rut . '?error_password');
                     } else {
-                        if (!preg_match('`[A-Z]`', $pass1)) {
-                            echo "<script>alert('La clave debe tener al menos una letra mayúscula')</script>";
-                            header('Refresh: 0; URL= ' . $rut . '?error_contrasena');
+                        if (!preg_match('`[0-9]`', $pass)) {
+                            echo "<script>alert('La clave debe tener al menos un caracter numérico')</script>";
+                            header('Refresh: -1; URL=' . $rut . '?error_password');
                         } else {
-                            if (!preg_match('`[0-9]`', $pass1)) {
-                                echo "<script>alert('La clave debe tener al menos un caracter numérico')</script>";
-                                header('Refresh: 0; URL=' . $rut . '?error_contrasena');
-                            } else {
-                                return true;
-                            }
+                            return "1";
                         }
                     }
                 }

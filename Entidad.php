@@ -9,7 +9,7 @@ class Elementos {
     private $celular;
     private $correo;
     private $contrasena;
-    
+
     // valibles de eventos
     private $idEventos;
     private $idUsuario;
