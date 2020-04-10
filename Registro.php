@@ -42,7 +42,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.php">Inicio</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Agendar.php">Agendar</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Eventos.php">Eventos</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.html">Acerca de</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.php">Acerca de</a></li>
                     </ul>
                 </div>
             </div>
