@@ -12,7 +12,26 @@ class Consultas {
             die($e->getMessage());
         }
     }
-
+    //************************Usuario***************************************//
+    //Registrar Usuarios
+    public function RegistrarUsuario(Elementos $datos) {
+        try {
+            $consulta = "INSERT INTO usuarios( `nombres`, `apellidos`, `celular`, `correo`, `contrasena`"
+                    . ") VALUES (?,?,?,?,?)";
+            $this->conexion->prepare($consulta)->execute(array(
+                $datos->__GET('nombres'),
+                $datos->__GET('apellidos'),
+                $datos->__GET('celular'),
+                $datos->__GET('correo'),
+                $datos->__GET('contrasena')
+              
+            ));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    //************************Eventos***************************************//
     //Registrar Evento
     public function RegistrarE(Elementos $datos) {
         try {
@@ -30,25 +49,6 @@ class Consultas {
             die($e->getMessage());
         }
     }
-    
-     //Registrar Usuarios
-    public function RegistrarUsuario(Elementos $datos) {
-        try {
-            $consulta = "INSERT INTO usuarios( `nombres`, `apellidos`, `celular`, `correo`, `contrasena`"
-                    . ") VALUES (?,?,?,?,?)";
-            $this->conexion->prepare($consulta)->execute(array(
-                $datos->__GET('nombres'),
-                $datos->__GET('apellidos'),
-                $datos->__GET('celular'),
-                $datos->__GET('correo'),
-                $datos->__GET('contrasena')
-              
-            ));
-        } catch (Exception $e) {
-            die($e->getMessage());
-        }
-    }
-
     //Listar Eventos
     public function ListarEventos() {
         try {
@@ -99,6 +99,82 @@ class Consultas {
     public function EliminarE($id) {
         try {
             $stm = $this->conexion->prepare("DELETE FROM eventos WHERE idEventos = ?");
+            $stm->execute(array($id));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    //************************Productos***************************************//
+    //Registrar Producto
+    public function RegistrarP(Elementos $datos) {
+        try {
+            $consulta = "INSERT INTO productos( `frase`, `nombreP`, `imagenP`, `descripcionP`"
+                    . ", `tipoP`) VALUES (?,?,?,?,?)";
+            $this->conexion->prepare($consulta)->execute(array(
+                $datos->__GET('frase'),
+                $datos->__GET('nombreP'),
+                $datos->__GET('imagenP'),
+                $datos->__GET('descripcionP'),
+                $datos->__GET('tipoP')
+            ));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+
+    //Listar Productos
+    public function ListarProductos($tipo) {
+        try {
+            $resultado = array();
+            $stm = $this->conexion->prepare("SELECT * FROM productos where tipoP= $tipo");
+            $stm->execute();
+
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $row) {
+                $datos = new Elementos();
+
+                $datos->__SET('idP', $row->idP);
+                $datos->__SET('frase', $row->frase);
+                $datos->__SET('nombreP', $row->nombreP);
+                $datos->__SET('imagenP', $row->imagenP);
+                $datos->__SET('descripcionP', $row->descripcionP);
+                $datos->__SET('tipoP', $row->tipoP);
+
+                $resultado[] = $datos;
+            }
+
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    //////editar Producto
+    public function EditarP(Elementos $datos) {
+        try {
+            $sql = "UPDATE productos SET frase = ?, nombreP = ?, imagenP = ?, descripcionP = ?"
+                    . ", tipoP=? WHERE idP = ?";
+
+            $this->conexion->prepare($sql)
+                    ->execute(
+                            array(
+                                $datos->__GET('frase'),
+                                $datos->__GET('nombreP'),
+                                $datos->__GET('imagenP'),
+                                $datos->__GET('descripcionP'),
+                                $datos->__GET('tipoP'),
+                                $datos->__GET('idP')
+                            )
+            );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+        
+     //Eliminar Producto
+    public function EliminarP($id) {
+        try {
+            $stm = $this->conexion->prepare("DELETE FROM productos WHERE idP = ?");
             $stm->execute(array($id));
         } catch (Exception $e) {
             die($e->getMessage());
