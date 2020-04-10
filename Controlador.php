@@ -19,7 +19,7 @@ if (isset($_REQUEST['operaciones'])) {
         case 'registrarUsuario':
 
             if ($verificar->verificarRegistroUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
-                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "registro.php")) {
+                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
                     $elementos->__SET('nombres', $_REQUEST['inputNombres']);
                     $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
                     $elementos->__SET('celular', $_REQUEST['inputCelular']);
