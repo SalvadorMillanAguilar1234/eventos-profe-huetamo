@@ -35,7 +35,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 
     <body style="background: linear-gradient(rgba(200, 200, 200, 0.65), rgba(200, 200, 200, 0.65));">
         <nav class="navbar navbar-light navbar-expand-lg bg-dark py-lg-4" id="mainNav">
-            <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="#">Brand</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand text-uppercase d-lg-none text-expanded" href="index.html">El profe de huetamo</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div
                     class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="nav navbar-nav mx-auto">
