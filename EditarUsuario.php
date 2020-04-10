@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 require_once 'Entidad.php';
 require_once 'Modelo.php';
@@ -22,8 +23,6 @@ $password2V = $exPassword . ".test(password2) && password2";
 //   header('Location: login.php');
 //}
 ?>
-
-<!DOCTYPE html>
 <html>
 
     <head>
@@ -57,17 +56,34 @@ $password2V = $exPassword . ".test(password2) && password2";
                 </div>
             </div>
         </nav>
+        <div>
+            <div class="modal left fade in" role="dialog" tabindex="-1" id="modalOpciones" aria-labelledby="modalChatLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
+                                <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
 
-        <a class="btn btn-primary pull-right" href="Login.php" data-bs-hover-animate="pulse"  type="submit">Iniciar sesión</a>
+                        <div class="modal-body">
+
+                            <h4>Opciones</h4>
+
+                            <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button><button class="btn btn-light text-left" type="button"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesión</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button">Nombre Completo</button></div>
 
 
-        <div id="validaciones">
-            <section class="page-section">
-                <div class="container">              
-                    <div class="bg-faded p-5 rounded col-xl-6 mx-auto">                        
-                        <form id="agregarAlumno" method="post"  class="form-horizontal" enctype="multipart/form-data" action="?operaciones=registrarUsuario" >
+            <div id="validaciones">
+        <section class="page-section">
+            <div class="container">              
+                <div class="bg-faded p-5 rounded col-xl-6 mx-auto">                        
+                    <form class="form-signin">
 
-                            <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" placeholder="Nombres" autofocus="">
+                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" placeholder="Nombres" autofocus="">
                             <br>
                             <p v-if='<?php echo $nombreV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
@@ -94,29 +110,31 @@ $password2V = $exPassword . ".test(password2) && password2";
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
 
                             <p v-show='password1 != password2' class="alert alert-danger">Las contrase&ntilde;as no coinciden</p>
-                            <div
-                                class="checkbox">
-                                <!--  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remember me</label></div> --->
-                            </div>    
-                            <br>
-                            <button v-if="<?php echo $nombreV; ?> && <?php echo $apellidoV; ?>&&<?php echo $celularV; ?>&&<?php echo $emailV; ?>
-                                    && <?php echo $password1V; ?>&&<?php echo $password2V; ?>&& password1 == password2" class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Registrar</button>
-                            <button v-else class="btn btn-primary btn-block btn-lg btn-signin" type="submit" disabled="true">Registrar</button>
-                        </form>
-                    </div>
-                </div>
+                        <div
+                            class="checkbox">
+                            <!--  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remember me</label></div> --->
+                        </div>    
+                        <br>
+                        <button v-if="<?php echo $nombreV; ?> && <?php echo $apellidoV; ?>&&<?php echo $celularV; ?>&&<?php echo $emailV; ?>
+                                    && <?php echo $password1V; ?>&&<?php echo $password2V; ?>&& password1 == password2" class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Editar</button>
+                                    <button v-else class="btn btn-primary btn-block btn-lg btn-signin" type="submit" disabled="true">Editar</button>
+                    </form></div>
+            </div>
 
 
-            </section>
-        </div>
+        </section>
+            </div>
         <footer class="text-light bg-dark footer text-faded text-center py-5">
             <div class="container">       
                 <div class="text-center center-block">      
                     <a href="https://www.facebook.com/restaurantelostruenos/"><i id="social-fb" class="fa fa-facebook fa-2x social"></i></a> &nbsp;
-                    <a href="tel:+523121944293" title="Comuniquese al: 312-194-4293"><i id="social-tw" class="fa fa-whatsapp fa-2x social"></i></a>	            
+                    <a href="" title="Comuniquese al: 312-194-4293"><i id="social-tw" class="fa fa-whatsapp fa-2x social"></i></a>	            
                 </div>          
             </div>
         </footer>
+
+
+
         <script src="assets/js/validaciones.js" type="text/javascript"></script>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
