@@ -7,7 +7,7 @@ require_once 'Controlador.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 session_start();
-
+$_SESSION['idUsuarios']=1;
 //Extraer el nombre completo del usuario
 $nombreCompleto="";
 if ($_SESSION['idUsuarios'] == true) {
@@ -170,6 +170,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                        aria-hidden="true" data-toggle='modal' data-target='#modalEliminarP' @click="abrirMEP(<?php echo $row->__GET('idP'); ?>,'<?php echo $R; ?>')"
                                        > <i class="fa fa-minus-square fa-lg fa-2x" aria-hidden="true" style="color: red"></i></a></span>
                                        <?php }?>
+                                <br><br>
                                 <div class="d-flex product-item-title">
                                     <!-- mr cambia la dirección del mensaje a la derecha-->
                                     <?php
@@ -230,7 +231,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                     <a v-show="true" href='' data-bs-hover-animate='pulse'
                                        aria-hidden="true" data-toggle='modal' data-target='#modalEliminarP' @click="abrirMEP(<?php echo $row->__GET('idP'); ?>,'<?php echo $R; ?>')"
                                        > <i class="fa fa-minus-square fa-lg fa-2x" aria-hidden="true" style="color: red"></i></a></span>
-                                <?php }?>
+                                <?php }?><br><br>
                                 <div class="d-flex product-item-title">
                                     <!-- mr cambia la dirección del mensaje a la derecha-->
                                     <?php
