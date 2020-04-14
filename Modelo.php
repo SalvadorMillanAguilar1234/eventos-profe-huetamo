@@ -13,6 +13,27 @@ class Consultas {
         }
     }
     //************************Usuario***************************************//
+    //login 
+        public function Login($A) {
+        try {
+            $resultado = array();
+            $stm = $this->conexion->prepare('SELECT idUsuarios FROM usuarios WHERE correo = "' . $A->__GET('correo') . '" AND contrasena = "' . $A->__GET('contrasena') . '"');
+            $stm->execute();
+                foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $row) {
+                $datos = new Elementos();
+
+                $datos->__SET('idUsuarios', $row->idUsuarios);
+                //$datos->__SET('passwordAdministrador', $row->passwordAdministrador);
+               
+                $resultado[] = $datos;
+             }
+           
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
     //Registrar Usuarios
     public function RegistrarUsuario(Elementos $datos) {
         try {

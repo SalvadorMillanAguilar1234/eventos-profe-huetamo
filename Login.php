@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <?php
+
+require_once 'Entidad.php';
+require_once 'Modelo.php';
+require_once 'Controlador.php';
+
+error_reporting(E_ALL ^ E_NOTICE);
+
 $exEmail = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";
 $exPassword = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/";
 $emailV = $exEmail . ".test(email) && email";
@@ -46,13 +53,13 @@ $passwordV = $exPassword . ".test(password) && password";
             <section class="page-section">
                 <div class="container">              
                     <div class="bg-faded p-5 rounded col-xl-6 mx-auto">                        
-                        <form class="form-signin">
+                        <form class="form-signin" name="form" id="login" method="post" action="?operaciones=veLog">
 
-                            <input class="form-control" type="email" v-model="email" id="inputEmail" required="" placeholder="Correo" autofocus="">
+                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" placeholder="Correo" autofocus="">
                             <br>
                             <p v-if='<?php echo $emailV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">La estructura del email es incorrecta.</p>      
-                            <input class="form-control" type="password" v-model="password" id="inputPassword" required="" placeholder="Contraseña">
+                            <input class="form-control" type="password" v-model="password" name="inputContrasena1" id="inputContrasena1" required="" placeholder="Contraseña">
                             <br>
                             <p v-if='<?php echo $passwordV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  

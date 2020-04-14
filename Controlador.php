@@ -11,7 +11,7 @@ $verificar = new Metodos();
 
 //Variables para validación
 //Solo se permiten letras, n&uacutemero, guiones y comas
-$exR = "/^([0-9a-zA-ZáéíóúÁÉÍÓÚÑñ\-\_,#.: ? \s])*$/";
+$exR = "/^([0-9a-zA-Záéíóú�?É�?ÓÚÑñ\-\_,#.: ? \s])*$/";
 
 if (isset($_REQUEST['operaciones'])) {
     switch ($_REQUEST['operaciones']) {
@@ -32,6 +32,29 @@ if (isset($_REQUEST['operaciones'])) {
                 }
             }
 
+            break;
+            
+            case 'veLog':
+            
+           // $elementos->__SET('idLogin', $_REQUEST['idLogin']);
+            $elementos->__SET('correo', $_REQUEST['inputCorreo']);
+            $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
+
+            if (empty($_REQUEST['inputCorreo'] && $_REQUEST['inputContrasena1'])) {
+                echo '<script>alert (" Cubre los campos vacío");</script>';
+            }else {
+                                        if (!empty($modelo->Login($elementos))) {
+                                            foreach ($modelo->Login($elementos) as $row)
+                                                $_SESSION['idUsuarios'] = $row->__GET('idUsuarios');
+                                           // header('Location: login.php?Admistrador?"' . $_SESSION['idAdministrador'] . '"');
+                                             header('Location: perfil.php');
+                                            
+                                        
+                                            }else {
+                                                    header('Location: login.php?error');
+                                                }
+                                            }
+                                       
             break;
 
         case 'registrarE':
