@@ -47,11 +47,11 @@ if (isset($_REQUEST['operaciones'])) {
                                             foreach ($modelo->Login($elementos) as $row)
                                                 $_SESSION['idUsuarios'] = $row->__GET('idUsuarios');
                                            // header('Location: login.php?Admistrador?"' . $_SESSION['idAdministrador'] . '"');
-                                             header('Location: perfil.php');
+                                             header('Location: index.php');
                                             
                                         
                                             }else {
-                                                    header('Location: login.php?error');
+                                                    header('Location: Login.php?error');
                                                 }
                                             }
                                        
@@ -120,7 +120,7 @@ if (isset($_REQUEST['operaciones'])) {
                 }
             } else {
                 echo "<script>alert('Rellene todos los campos')</script>";
-                header('Refresh: 0; URL= index.php?');
+                header('Refresh: 0; URL= index.php');
             }
             break;
 
@@ -151,10 +151,10 @@ if (isset($_REQUEST['operaciones'])) {
                         $elementos->__SET('tipoP', $_REQUEST['txtTipoP']);
                         $elementos->__SET('idP', $_REQUEST['txtIdP']);
                         $modelo->EditarP($elementos);
-                        header('Location: index.php?' . $img);
+                        header('Location: index.php');
                     } else {
                         echo "<script>alert('no modifique el website')</script>";
-                        header('Refresh: 0; URL= index.php?');
+                        header('Refresh: 0; URL= index.php');
                     }
                 }
             } else {
