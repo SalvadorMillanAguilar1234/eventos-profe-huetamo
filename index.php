@@ -7,7 +7,6 @@ require_once 'Controlador.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
 session_start();
-$_SESSION['idUsuarios']=1;
 //Extraer el nombre completo del usuario
 $nombreCompleto="";
 if ($_SESSION['idUsuarios'] == true) {
