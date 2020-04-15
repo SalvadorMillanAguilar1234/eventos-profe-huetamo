@@ -16,8 +16,8 @@ if ($_SESSION['idUsuarios'] == true) {
     foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
         $nombreCompleto = $row->__GET('nombres') . " " . $row->__GET('apellidos');
     endforeach;
-}else{
-    $_SESSION['idUsuarios']=0;
+}else {
+    $_SESSION['idUsuarios'] = 0;
 }
 
 
@@ -155,11 +155,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class='date'>&nbsp;</div>
                         </li>
                         <span v-for="dia of dias">
-                            <li v-if="dia<=diaA+2 && mes==mesA">
-                                <div  class='date' >
-                                    {{dia}}
-                                </div>
-                            </li>
+                            
                             <?php
                             //Extracción de datos de evento
                             foreach ($modelo->ListarEventos() as $row):
@@ -203,6 +199,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                     <?php
                                 endforeach;
                                 ?>
+                                
                                 <a v-if="(dia>diaA+2 || mes > mesA )|| ano>anA" href='' data-bs-hover-animate='pulse' 
                                    data-toggle='modal' data-target='#<?php echo $modal; ?>' @click="abrirModal(dia)">
                                     <li>
@@ -211,6 +208,11 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                         </div>
                                     </li>
                                 </a>
+                                    <li v-else>
+                                    <div  class='date' >
+                                        {{dia}}
+                                    </div>
+                                </li>
                             </span>
                         </span>
 
@@ -258,7 +260,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                         no deve superar los 240 caracteres.</p>
                                 </div>
                                 <!-- Fecha que selecciona en el calendario -->
-                                <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios']?>">
+                                <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
                                 <input type="hidden"  id="txtFechaE" name="txtFechaE">
                                 <input type="hidden" name="txtIdEE" id="txtIdEE">
                                 <div v-if="<?php echo $lugV; ?> && (<?php echo $exRH; ?>|| horaE) && <?php echo $desV; ?>" class="modal-footer" style="float: right">
@@ -327,7 +329,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             </div>
                             <!-- Fecha que selecciona en el calendario -->
                             <input type="hidden"  id="txtFecha" name="txtFecha">
-                            <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios']?>">
+                            <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
 
                             <div v-if="<?php echo $lugV; ?> && <?php echo $exRH; ?> && <?php echo $desV; ?>" class="modal-footer" style="float: right">
                                 <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
