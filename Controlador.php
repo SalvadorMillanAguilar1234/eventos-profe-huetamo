@@ -18,7 +18,7 @@ if (isset($_REQUEST['operaciones'])) {
 
         case 'registrarUsuario':
 
-            if ($verificar->verificarRegistroUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
+            if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
                 if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
                     $elementos->__SET('nombres', $_REQUEST['inputNombres']);
                     $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
@@ -29,6 +29,25 @@ if (isset($_REQUEST['operaciones'])) {
                     $modelo->RegistrarUsuario($elementos);
 
                     header('Location: Login.php');
+                }
+            }
+
+            break;
+           
+            case 'editarUsuario':
+
+            if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
+                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
+                    $elementos->__SET('nombres', $_REQUEST['inputNombres']);
+                    $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
+                    $elementos->__SET('celular', $_REQUEST['inputCelular']);
+                    $elementos->__SET('correo', $_REQUEST['inputCorreo']);
+                    $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
+                    $elementos->__SET('idUsuarios', $_REQUEST['inputId']);
+
+                    $modelo->EditarUsuario($elementos);
+
+                    header('Location: EditarUsuario.php');
                 }
             }
 
@@ -277,7 +296,7 @@ class Metodos {
         }
     }
 
-    public function verificarRegistroUsuarios($nombres, $apellidos, $celular, $correo, $contrasena1, $contrasena2) {
+    public function verificarRegistroEditarUsuarios($nombres, $apellidos, $celular, $correo, $contrasena1, $contrasena2) {
         if (empty($nombres && $apellidos && $celular && $correo && $contrasena1 && $contrasena2)) {
             echo '<script>alert (" Cubre los campos vacÃ­o");</script>';
         } else {

@@ -4,8 +4,6 @@ require_once 'Entidad.php';
 require_once 'Modelo.php';
 require_once 'Controlador.php';
 
-error_reporting(E_ALL ^ E_NOTICE);
-
 //variables para validaci�n
 $ex = "/^[A-Z\u00A0-\uD7FF]([a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s])*$/";
 $exEmail = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";
@@ -16,12 +14,19 @@ $celularV = "/^[0-9]*$/.test(celular) && celular && celular.length == 10";
 $emailV = $exEmail . ".test(email) && email";
 $password1V = $exPassword . ".test(password1) && password1";
 $password2V = $exPassword . ".test(password2) && password2";
-//session_start();
-//if ($_SESSION['idAdmin'] == true) {
-//    
-//} else {
-//   header('Location: login.php');
-//}
+
+error_reporting(E_ALL ^ E_NOTICE);
+session_start();
+
+//Extraer el nombre completo del usuario
+$nombreCompleto="";
+if ($_SESSION['idUsuarios'] == true) {
+foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
+    $nombreCompleto= $row->__GET('nombres')." ".$row->__GET('apellidos');
+endforeach;
+}else{
+    $_SESSION['idUsuarios']=0;
+}
 ?>
 <html>
 
@@ -80,31 +85,33 @@ $password2V = $exPassword . ".test(password2) && password2";
             <div id="validaciones">
         <section class="page-section">
             <div class="container">              
-                <div class="bg-faded p-5 rounded col-xl-6 mx-auto">                        
-                    <form class="form-signin">
-
-                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" placeholder="Nombres" autofocus="">
+                <div class="bg-faded p-5 rounded col-xl-6 mx-auto">  
+                      <?php foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row): ?>
+                    <form class="form-signin" id="editarUsuario" method="post"  class="form-horizontal" action="?operaciones=editarUsuario">  
+                  
+                        <input class="form-control" type="text" name="inputId" id="inputId" value="<?php echo $row->__GET('idUsuarios'); ?>" required=""  autofocus="">
+                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" value="<?php echo $row->__GET('nombres'); ?>" placeholder="Nombres" autofocus="">
                             <br>
                             <p v-if='<?php echo $nombreV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
 
-                            <input class="form-control" type="text" v-model="apellido" name="inputApellidos" id="inputApellidos" required="" placeholder="Apellidos" autofocus="">
+                            <input class="form-control" type="text" v-model="apellido" name="inputApellidos" id="inputApellidos" required="" value="<?php echo $row->__GET('apellidos'); ?>" placeholder="Apellidos" autofocus="">
                             <br>
                             <p v-if='<?php echo $apellidoV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
-                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required="" placeholder="Celular">
+                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required="" value="<?php echo $row->__GET('celular'); ?>" placeholder="Celular">
                             <br>
                             <p v-if='<?php echo $celularV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">El tel&#233;fono debe tener 10 n&#250;meros. Ejemplo: 4531447879</p>
-                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" placeholder="Correo" autofocus="">
+                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" value="<?php echo $row->__GET('correo'); ?>" placeholder="Correo" autofocus="">
                             <br>
                             <p v-if='<?php echo $emailV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">La estructura del email es incorrecta.</p>      
-                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required="" placeholder="Contraseña">
+                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required="" value="<?php echo $row->__GET('contrasena'); ?>" placeholder="Contraseña">
                             <br> 
                             <p v-if='<?php echo $password1V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
-                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required="" placeholder="Repetir contraseña">
+                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required="" value="<?php echo $row->__GET('contrasena'); ?>" placeholder="Repetir contraseña">
                             <br>
                             <p v-if='<?php echo $password2V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
@@ -118,7 +125,9 @@ $password2V = $exPassword . ".test(password2) && password2";
                         <button v-if="<?php echo $nombreV; ?> && <?php echo $apellidoV; ?>&&<?php echo $celularV; ?>&&<?php echo $emailV; ?>
                                     && <?php echo $password1V; ?>&&<?php echo $password2V; ?>&& password1 == password2" class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Editar</button>
                                     <button v-else class="btn btn-primary btn-block btn-lg btn-signin" type="submit" disabled="true">Editar</button>
-                    </form></div>
+                    </form>
+                 <?php endforeach; ?>
+                </div>
             </div>
 
 
