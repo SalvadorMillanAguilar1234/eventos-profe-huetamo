@@ -25,7 +25,8 @@ foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
     $nombreCompleto= $row->__GET('nombres')." ".$row->__GET('apellidos');
 endforeach;
 }else{
-    $_SESSION['idUsuarios']=0;
+    //enviar a login
+    header('Location: Login.php');
 }
 ?>
 <html>
@@ -74,44 +75,61 @@ endforeach;
 
                             <h4>Opciones</h4>
 
-                            <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button><button class="btn btn-light text-left" type="button"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                            <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
+                                <form method="post" action="?operaciones=cerrarSesion">
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                                    </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button">Nombre Completo</button></div>
+            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo $nombreCompleto; ?></button></div>
 
 
             <div id="validaciones">
         <section class="page-section">
             <div class="container">              
                 <div class="bg-faded p-5 rounded col-xl-6 mx-auto">  
-                      <?php foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row): ?>
+                      <?php foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row): 
+                          
+                          ?>
+                    <!-- Método para la asignacion de datos, a los input-->
+                    <!-- Nota: se pudo asignar los datos directamente a las variable en la interpolación no era opción,
+                               esto hace que los datos siempre tengan el valor asignado, sin permitir cambios por el usuario.
+                               por eso se hizo un llamado automático a la funcion la primera vez que enpre al sito, la variable interruptor
+                               fue ocultar-->
+                    <div v-if='!ocultar'>
+                    {{enviar('<?php echo $row->__GET('nombres'); ?>','<?php echo $row->__GET('apellidos'); ?>',
+                             '<?php echo $row->__GET('celular'); ?>','<?php echo $row->__GET('correo'); ?>',
+                             '<?php echo $row->__GET('contrasena'); ?>')}}
+                     <!-- al asignar el valor de 1 a el dato ocultar, ya nunca más ara la acci´n de reasignar los valores de la BD-->
+                    {{ocultar='1'}}
+                    </div>
                     <form class="form-signin" id="editarUsuario" method="post"  class="form-horizontal" action="?operaciones=editarUsuario">  
                   
-                        <input class="form-control" type="text" name="inputId" id="inputId" value="<?php echo $row->__GET('idUsuarios'); ?>" required=""  autofocus="">
-                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" value="<?php echo $row->__GET('nombres'); ?>" placeholder="Nombres" autofocus="">
+                        <input class="form-control" type="hidden" name="inputId" id="inputId" value="<?php echo $row->__GET('idUsuarios'); ?>" required=""  autofocus="">
+                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required=""  placeholder="Nombres" autofocus="">
                             <br>
                             <p v-if='<?php echo $nombreV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
 
-                            <input class="form-control" type="text" v-model="apellido" name="inputApellidos" id="inputApellidos" required="" value="<?php echo $row->__GET('apellidos'); ?>" placeholder="Apellidos" autofocus="">
+                            <input class="form-control" type="text" v-model="apellido" name="inputApellidos" id="inputApellidos" required="" placeholder="Apellidos" autofocus="">
                             <br>
                             <p v-if='<?php echo $apellidoV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
-                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required="" value="<?php echo $row->__GET('celular'); ?>" placeholder="Celular">
+                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required=""  placeholder="Celular">
                             <br>
                             <p v-if='<?php echo $celularV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">El tel&#233;fono debe tener 10 n&#250;meros. Ejemplo: 4531447879</p>
-                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" value="<?php echo $row->__GET('correo'); ?>" placeholder="Correo" autofocus="">
+                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required=""  placeholder="Correo" autofocus="">
                             <br>
                             <p v-if='<?php echo $emailV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">La estructura del email es incorrecta.</p>      
-                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required="" value="<?php echo $row->__GET('contrasena'); ?>" placeholder="ContraseÃ±a">
+                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required=""  placeholder="ContraseÃ±a">
                             <br> 
                             <p v-if='<?php echo $password1V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
-                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required="" value="<?php echo $row->__GET('contrasena'); ?>" placeholder="Repetir contraseÃ±a">
+                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required=""  placeholder="Repetir contraseÃ±a">
                             <br>
                             <p v-if='<?php echo $password2V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
@@ -144,7 +162,7 @@ endforeach;
 
 
 
-        <script src="assets/js/validaciones.js" type="text/javascript"></script>
+        <script src="assets/js/validaciones_editar_user.js" type="text/javascript"></script>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bs-init.js"></script>
