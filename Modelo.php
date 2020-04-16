@@ -52,6 +52,27 @@ class Consultas {
         }
     }
     
+     //////editar Evento
+    public function EditarUsuario(Elementos $datos) {
+        try {
+            $sql = "UPDATE usuarios SET nombres = ?, apellidos = ?, celular = ?, correo = ?, contrasena = ? WHERE idUsuarios = ?";
+
+            $this->conexion->prepare($sql)
+                    ->execute(
+                            array(
+                                $datos->__GET('nombres'),
+                                $datos->__GET('apellidos'),
+                                $datos->__GET('celular'),
+                                $datos->__GET('correo'),
+                                $datos->__GET('contrasena'),
+                                $datos->__GET('idUsuarios')
+                            )
+            );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
     //Listar Usuario iniciado sesion
     public function ListarUsuario($idUsuarios) {
         try {

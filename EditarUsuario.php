@@ -4,8 +4,6 @@ require_once 'Entidad.php';
 require_once 'Modelo.php';
 require_once 'Controlador.php';
 
-error_reporting(E_ALL ^ E_NOTICE);
-
 //variables para validación
 $ex = "/^[A-Z\u00A0-\uD7FF]([a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\s])*$/";
 $exEmail = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";
@@ -16,12 +14,20 @@ $celularV = "/^[0-9]*$/.test(celular) && celular && celular.length == 10";
 $emailV = $exEmail . ".test(email) && email";
 $password1V = $exPassword . ".test(password1) && password1";
 $password2V = $exPassword . ".test(password2) && password2";
-//session_start();
-//if ($_SESSION['idAdmin'] == true) {
-//    
-//} else {
-//   header('Location: login.php');
-//}
+
+error_reporting(E_ALL ^ E_NOTICE);
+session_start();
+
+//Extraer el nombre completo del usuario
+$nombreCompleto="";
+if ($_SESSION['idUsuarios'] == true) {
+foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
+    $nombreCompleto= $row->__GET('nombres')." ".$row->__GET('apellidos');
+endforeach;
+}else{
+    //enviar a login
+    header('Location: Login.php');
+}
 ?>
 <html>
 
@@ -50,7 +56,9 @@ $password2V = $exPassword . ".test(password2) && password2";
                     <ul class="nav navbar-nav mx-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.php">Inicio</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Agendar.php">Agendar</a></li>
+                        <?php if ($_SESSION['idUsuarios'] == 1) { ?>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Eventos.php">Eventos</a></li>
+                        <?php }?>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.php">Acerca de</a></li>
                     </ul>
                 </div>
@@ -69,21 +77,40 @@ $password2V = $exPassword . ".test(password2) && password2";
 
                             <h4>Opciones</h4>
 
-                            <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button><button class="btn btn-light text-left" type="button"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                            <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
+                                <form method="post" action="?operaciones=cerrarSesion">
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                                    </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button">Nombre Completo</button></div>
+            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo $nombreCompleto; ?></button></div>
 
 
             <div id="validaciones">
         <section class="page-section">
             <div class="container">              
-                <div class="bg-faded p-5 rounded col-xl-6 mx-auto">                        
-                    <form class="form-signin">
-
-                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required="" placeholder="Nombres" autofocus="">
+                <div class="bg-faded p-5 rounded col-xl-6 mx-auto">  
+                      <?php foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row): 
+                          
+                          ?>
+                    <!-- Método para la asignacion de datos, a los input-->
+                    <!-- Nota: se pudo asignar los datos directamente a las variable en la interpolación no era opción,
+                               esto hace que los datos siempre tengan el valor asignado, sin permitir cambios por el usuario.
+                               por eso se hizo un llamado automático a la funcion la primera vez que enpre al sito, la variable interruptor
+                               fue ocultar-->
+                    <div v-if='!ocultar'>
+                    {{enviar('<?php echo $row->__GET('nombres'); ?>','<?php echo $row->__GET('apellidos'); ?>',
+                             '<?php echo $row->__GET('celular'); ?>','<?php echo $row->__GET('correo'); ?>',
+                             '<?php echo $row->__GET('contrasena'); ?>')}}
+                     <!-- al asignar el valor de 1 a el dato ocultar, ya nunca más ara la acci´n de reasignar los valores de la BD-->
+                    {{ocultar='1'}}
+                    </div>
+                    <form class="form-signin" id="editarUsuario" method="post"  class="form-horizontal" action="?operaciones=editarUsuario">  
+                  
+                        <input class="form-control" type="hidden" name="inputId" id="inputId" value="<?php echo $row->__GET('idUsuarios'); ?>" required=""  autofocus="">
+                        <input class="form-control" type="text" v-model="nombre" name="inputNombres" id="inputNombres" required=""  placeholder="Nombres" autofocus="">
                             <br>
                             <p v-if='<?php echo $nombreV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
@@ -92,19 +119,19 @@ $password2V = $exPassword . ".test(password2) && password2";
                             <br>
                             <p v-if='<?php echo $apellidoV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Solo se permiten  letras, tildes, espacios y la primer letra tiene que ser may&#250;scula.</p>
-                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required="" placeholder="Celular">
+                            <input class="form-control" type="tel" v-model="celular" name="inputCelular" id="inputCelular" required=""  placeholder="Celular">
                             <br>
                             <p v-if='<?php echo $celularV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">El tel&#233;fono debe tener 10 n&#250;meros. Ejemplo: 4531447879</p>
-                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" placeholder="Correo" autofocus="">
+                            <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required=""  placeholder="Correo" autofocus="">
                             <br>
                             <p v-if='<?php echo $emailV; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">La estructura del email es incorrecta.</p>      
-                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required="" placeholder="ContraseÃ±a">
+                            <input class="form-control" type="password" v-model="password1" name="inputContrasena1" id="inputContrasena1" required=""  placeholder="ContraseÃ±a">
                             <br> 
                             <p v-if='<?php echo $password1V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
-                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required="" placeholder="Repetir contraseÃ±a">
+                            <input class="form-control" type="password" v-model="password2" name="inputContrasena2" id="inputContrasena2" required=""  placeholder="Repetir contraseÃ±a">
                             <br>
                             <p v-if='<?php echo $password2V; ?>' class="alert alert-success">Correcto</p>
                             <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
@@ -118,7 +145,9 @@ $password2V = $exPassword . ".test(password2) && password2";
                         <button v-if="<?php echo $nombreV; ?> && <?php echo $apellidoV; ?>&&<?php echo $celularV; ?>&&<?php echo $emailV; ?>
                                     && <?php echo $password1V; ?>&&<?php echo $password2V; ?>&& password1 == password2" class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Editar</button>
                                     <button v-else class="btn btn-primary btn-block btn-lg btn-signin" type="submit" disabled="true">Editar</button>
-                    </form></div>
+                    </form>
+                 <?php endforeach; ?>
+                </div>
             </div>
 
 
@@ -135,7 +164,7 @@ $password2V = $exPassword . ".test(password2) && password2";
 
 
 
-        <script src="assets/js/validaciones.js" type="text/javascript"></script>
+        <script src="assets/js/validaciones_editar_user.js" type="text/javascript"></script>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="assets/js/bs-init.js"></script>
