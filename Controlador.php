@@ -308,15 +308,15 @@ class Metodos {
                         return true;
                     } else {
                         echo '<script>alert ("No ingrese comillas");</script>';
-                        header('Refresh: 0; URL= registro.php?error');
+                        header('Refresh: 0; URL= ?error');
                     }
                 } else {
                     echo '<script>alert ("El campo celular solo acepta numeros");</script>';
-                    header('Refresh: 0; URL= registro.php?error');
+                    header('Refresh: 0; URL= ?error');
                 }
             } else {
                 echo '<script>alert ("Escribe un correo electronico valido");</script>';
-                header('Refresh: 0; URL= registro.php?error');
+                header('Refresh: 0; URL= ?error');
             }
         }
     }
