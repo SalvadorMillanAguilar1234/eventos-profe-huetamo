@@ -1,7 +1,6 @@
 var hoy = new Date();
 var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "novimbre", "diciembre"];
-
-
+var diaS = new Date(hoy.getFullYear(),hoy.getMonth(),0);
 //Calendario
 new Vue({
 
@@ -14,7 +13,7 @@ new Vue({
         diaA: hoy.getDate(),
         mesA: hoy.getMonth() + 1,
         anA: hoy.getFullYear(),
-        p: hoy.getDay() ,
+        p: diaS.getDay() + 1,
         dias: new Date(hoy.getFullYear(), hoy.getMonth()+1, 0).getDate(),
         a: "",
         direccionE:"",
@@ -42,7 +41,7 @@ new Vue({
         {
             if (this.mes == hoy.getMonth() + 1 && this.ano == hoy.getFullYear())
             {
-                //si es el mismo més y el mismo año, no se podra acceder a los años posteriores
+                //si es el mismo mÃ©s y el mismo aÃ±o, no se podra acceder a los aÃ±os posteriores
             } else
             {
                 if (this.mes != 1)
