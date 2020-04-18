@@ -111,13 +111,55 @@ if (isset($_REQUEST['operaciones'])) {
             }
 
             break;
+            
+                    case 'editarEstadoEvento':
+
+            
+                if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE1'])) {
+
+                    $elementos->__SET('estado', 1);
+                    $elementos->__SET('idEventos', $_REQUEST['txtIdE1']);
+                   
+
+                    $modelo->EditarEstadoEvento($elementos);
+                    header('Location: Eventos.php');
+                } else {
+                    echo "<script>alert('No modifique el id del evento')</script>";
+                    header('Refresh: 0; URL= Agendar.php');
+                }
+            
+
+            break;
 
         case 'eliminarE':
 
             if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE'])) {
-
-                $modelo->EliminarE($_REQUEST['txtIdE']);
-                header('Location: Agendar.php');
+              if (preg_match("/^([0-9])*$/", $_REQUEST['txtUrl'])) {
+                    if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE3'])) {
+                  
+                        if (empty($_REQUEST['txtIdE3'])){
+                            $modelo->EliminarE($_REQUEST['txtIdE']);
+                        } else {
+                           $modelo->EliminarE($_REQUEST['txtIdE3']); //viene de Eventos.php eliminar evento confirmado
+                        }
+                
+                
+                
+                if($_REQUEST['txtUrl'] == 1){
+                   header('Location: Eventos.php');
+                } else {
+                      header('Location: Agendar.php');
+                }
+             
+                
+                  } else {
+                echo "<script>alert('No modifique la url')</script>";
+                header('Refresh: 0; URL= Eventos.php');
+            }
+                 } else {
+                echo "<script>alert('No modifique la url')</script>";
+                header('Refresh: 0; URL= Eventos.php');
+            }
             } else {
                 echo "<script>alert('No modifique el id del evento')</script>";
                 header('Refresh: 0; URL= Agendar.php');

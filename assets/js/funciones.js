@@ -1,6 +1,7 @@
 var hoy = new Date();
 var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "novimbre", "diciembre"];
-var diaS = new Date(hoy.getFullYear(),hoy.getMonth(),0);
+
+
 //Calendario
 new Vue({
 
@@ -13,7 +14,7 @@ new Vue({
         diaA: hoy.getDate(),
         mesA: hoy.getMonth() + 1,
         anA: hoy.getFullYear(),
-        p: diaS.getDay() + 1,
+        p: hoy.getDay() ,
         dias: new Date(hoy.getFullYear(), hoy.getMonth()+1, 0).getDate(),
         a: "",
         direccionE:"",
@@ -77,6 +78,35 @@ new Vue({
     }
 });
 
+  function abrirMConfE($correo, $celular, $descripcion) {    
+            //abrir  modal descripcion eventos confirmados     
+ $('#modalDetallesConfirmados').modal('show'); // abrir
+            document.getElementById('textCorreo').innerHTML = $correo;
+            document.getElementById('textCelular').innerHTML = $celular;
+            document.getElementById('textDescripcion').innerHTML = $descripcion;
+//            document.getElementById("txtIdEE").value = $idE;
+            
+        }
+  function abrirMConfE1($id, $correo, $celular, $descripcion) {    
+            //abrir  modal descripcion eventos no confirmados     
+ $('#modalDetallesNoConfirmados').modal('show'); // abrir
+            document.getElementById("txtIdE1").value = $id; // boton aceptar
+            document.getElementById("txtIdE").value = $id; //boton denegar
+            document.getElementById('textCorreo1').innerHTML = $correo;
+            document.getElementById('textCelular1').innerHTML = $celular;
+            document.getElementById('textDescripcion1').innerHTML = $descripcion;
+//            document.getElementById("txtIdEE").value = $idE;
+            
+        }       
+        
+     function abrirModalEminarE($id) {    
+            //abrir  modalconfirmar eliminar evento  
+ $('#modalEliminarE').modal('show'); // abrir
+
+
+            document.getElementById("txtIdE3").value = $id; 
+        }       
+        
 //Registrar Evento
 new Vue({
     el:"#modalAgendarE",

@@ -93,7 +93,6 @@ endforeach;
             <div class="container">              
                 <div class="bg-faded p-5 rounded col-xl-6 mx-auto">  
                       <?php foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row): 
-                          
                           ?>
                     <!-- Método para la asignacion de datos, a los input-->
                     <!-- Nota: se pudo asignar los datos directamente a las variable en la interpolación no era opción,

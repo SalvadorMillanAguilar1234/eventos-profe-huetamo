@@ -145,6 +145,33 @@ class Consultas {
             die($e->getMessage());
         }
     }
+    
+      //Listar Eventos
+    public function ListarEventosFiltro($estado) {
+        try {
+            $resultado = array();
+            $stm = $this->conexion->prepare("SELECT * FROM eventos WHERE estado = $estado");
+            $stm->execute();
+
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $row) {
+                $datos = new Elementos();
+
+                $datos->__SET('idEventos', $row->idEventos);
+                $datos->__SET('idUsuario', $row->idUsuario);
+                $datos->__SET('fecha', $row->fecha);
+                $datos->__SET('hora', $row->hora);
+                $datos->__SET('direccion', $row->direccion);
+                $datos->__SET('estado', $row->estado);
+                $datos->__SET('descripcion', $row->descripcion);
+
+                $resultado[] = $datos;
+            }
+
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
     //////editar Evento
     public function EditarE(Elementos $datos) {
@@ -158,6 +185,24 @@ class Consultas {
                                 $datos->__GET('direccion'),
                                 $datos->__GET('descripcion'),
                                 $datos->__GET('idEventos')
+                            )
+            );
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+      //////editar el estado del evento
+    public function EditarEstadoEvento(Elementos $datos) {
+        try {
+            $sql = "UPDATE eventos SET estado = ? WHERE idEventos = ?";
+
+            $this->conexion->prepare($sql)
+                    ->execute(
+                            array(
+                                $datos->__GET('estado'),
+                                $datos->__GET('idEventos'),
+                               
                             )
             );
         } catch (Exception $e) {

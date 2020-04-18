@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+<?php
+require_once 'Entidad.php';
+require_once 'Modelo.php';
+require_once 'Controlador.php';
+
+error_reporting(E_ALL ^ E_NOTICE);
+session_start();
+
+//Extraer el nombre completo del usuario
+$nombreCompleto="";
+if ($_SESSION['idUsuarios'] == 1) {
+foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
+    $nombreCompleto= $row->__GET('nombres')." ".$row->__GET('apellidos');
+endforeach;
+}else{
+    //enviar a login
+    header('Location: Login.php');
+}
+?>
 <html>
 
 <head>
@@ -48,13 +67,13 @@
                      
              <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href='EditarUsuario.php' "><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
 <form method="post" action="?operaciones=cerrarSesion">
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesión</button>
                                     </form>
 </div>
                     </div>
                 </div>
             </div>
-        </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button">Nombre Completo</button></div>
+        </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo $nombreCompleto; ?></button></div>
     
        
         <div class="modal left fade in" role="dialog" tabindex="-1" id="modalDetallesConfirmados" aria-labelledby="modalChatLabel">
@@ -71,11 +90,11 @@
      
                     <h3>Información</h3>
             <br>
-                    <h6>Correo: </h6>
+                    <h6><label id="textCorreo">Correo</label></h6>
              <br>
-                                 <h6>Celular: </h6>
+                                <h6><label id="textCelular">Celular</label></h6>
              <br>
-               <h6>Descripción: </h6>
+             <h6><label id="textDescripcion">descripcion</label></h6>
              <br>
             <div
                 class="checkbox">
@@ -105,16 +124,37 @@
             
            <h3>Información</h3>
             <br>
-                    <h6>Correo: </h6>
+                    <h6><label id="textCorreo1">Correo</label></h6>
              <br>
-                                 <h6>Celular: </h6>
+                                <h6><label id="textCelular1">Celular</label></h6>
              <br>
-               <h6>Descripción: </h6>
+             <h6><label id="textDescripcion1">descripcion</label></h6>
              <br>
              <div class="btn-group"  style=" float:right;">
                  
-            <button class="btn btn-primary" type="submit">Confirmar</button> &nbsp;
-                <button class="btn btn-primary" type="submit">Denegar</button>
+           <form class="form-signin" id="editarEstadoEvento" method="post"  class="form-horizontal" action="?operaciones=editarEstadoEvento">       
+             <input class="form-control" hidden="true" name="txtIdE1" id="txtIdE1" value="" required=""  autofocus="">
+               <button class="btn btn-primary" type="submit">Confirmar</button> &nbsp;
+            </form>
+                 
+                 <form class="form-signin" id="eliminarEvento" method="post"  class="form-horizontal" action="?operaciones=eliminarE" onsubmit="return confirmation()">       
+                     <input class="form-control" hidden="true" name="txtIdE" id="txtIdE" value="" required=""  autofocus="">
+             <input class="form-control" name="txtUrl" hidden="true" id="txtUrl" value="1" required=""  autofocus="">
+              <button class="btn btn-primary" type="submit">Denegar</button>
+            </form>
+               
+                  <script type="text/javascript">
+
+function confirmation() {
+    if(confirm("Desea denegar y eliminar el evento?"))
+    {
+        return true;
+    }
+    return false;
+}
+
+</script>
+                 
              </div>
                 </div>
                 </div>
@@ -125,6 +165,33 @@
         </div>
   
     
+    <!-- Modal de Eliminar Evento-->
+        <div class="modal left fade in" role="dialog" tabindex="-1" id="modalEliminarE" aria-labelledby="modalChatLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5  style="float: left"> Eliminar evento</h5>
+                        <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
+                            <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+                        </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="eliminarEvento" method="post" action="?operaciones=eliminarE">
+                            <center><label>&iquest;Seguro que desea eliminar el evento?</label></center>
+                            <input hidden="true" name="txtIdE3" id="txtIdE3">
+                            <input hidden="true" name="txtUrl" id="txtUrl" value="1">
+                            <div  class="modal-footer" style="float: right">
+                                <button type="button" class="btn btn-primary"  data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                <button  class="btn btn-danger "  > Eliminar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
     <section class="page-section">
         <div class="container col-xl-12">          
             
@@ -134,22 +201,33 @@
     <div class="table-responsive">
                <table class="table table-striped">
                    <thead class="page-section cta" style="color: white">
+                      
       <tr>
       <th scope="col">Fecha</th>
       <th scope="col">Hora</th>
       <th scope="col">Dirección</th>
       <th scope="col">Usuario</th>
       <th scope="col">Detalles</th>
+        <th scope="col">Eliminar</th>
     </tr>
+    
   </thead>
   <tbody>
+       <?php foreach ($modelo->ListarEventosFiltro(1) as $row): 
+             foreach ($modelo->ListarUsuario($row->__GET('idUsuario')) as $row1): 
+                          ?>
     <tr>
-      <td>04/03/2020</td>
-      <td>09:33 a.m</td>
-      <td>Calle arteaga 220</td>
-      <td>Juan Perez</td>
-       <td><button  class="btn btn-primary fa fa-address-card-o" data-toggle="modal" data-target="#modalDetallesConfirmados" type="button"></button></td>
+      <td><?php echo $row->__GET('fecha'); ?></td>
+      <td><?php echo $row->__GET('hora'); ?></td>
+      <td><?php echo $row->__GET('direccion'); ?></td>
+      <td><?php echo $row1->__GET('nombres')." ".$row1->__GET('apellidos'); ?></td>
+      <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE('<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo $row->__GET('descripcion'); ?>')"></button></td>
+<!--Eliminar-->
+      <td><button  class="btn btn-primary fa fa-times" type="button" onclick="abrirModalEminarE('<?php echo $row->__GET('idEventos'); ?>')"></button></td>
     </tr>
+    <?php endforeach;
+          endforeach;
+    ?>
   </tbody>
 </table>
            </div>  
@@ -170,14 +248,20 @@
       <th scope="col">Detalles</th>
     </tr>
   </thead>
-  <tbody>
+ <tbody>
+       <?php foreach ($modelo->ListarEventosFiltro(0) as $row): 
+             foreach ($modelo->ListarUsuario($row->__GET('idUsuario')) as $row1): 
+                          ?>
     <tr>
-      <td>04/03/2020</td>
-      <td>10:23 a.m</td>
-      <td>Calle Benito 240</td>
-      <td>Maria Ortega</td>
-       <td><button  class="btn btn-primary fa fa-address-card-o" data-toggle="modal" data-target="#modalDetallesNoConfirmados" type="button"></button></td>
+      <td><?php echo $row->__GET('fecha'); ?></td>
+      <td><?php echo $row->__GET('hora'); ?></td>
+      <td><?php echo $row->__GET('direccion'); ?></td>
+      <td><?php echo $row1->__GET('nombres')." ".$row1->__GET('apellidos'); ?></td>
+       <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE1('<?php echo $row->__GET('idEventos'); ?>','<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo $row->__GET('descripcion'); ?>')"></button></td>
     </tr>
+    <?php endforeach;
+          endforeach;
+    ?>
   </tbody>
 </table>
            </div>   
@@ -194,6 +278,7 @@
           </div>
     </footer>
     
+    <script src="assets/js/funciones.js" type="text/javascript"></script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
