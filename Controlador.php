@@ -9,17 +9,17 @@ $elementos = new Elementos();
 $modelo = new Consultas();
 $verificar = new Metodos();
 
-//Variables para validación
+//Variables para validaciÃ³n
 //Solo se permiten letras, n&uacutemero, guiones y comas
-$exR = "/^([0-9a-zA-ZáéíóúÁÉÍÓÚÑñ\-\_,#.: ? \s])*$/";
+$exR = "/^([0-9a-zA-ZÃ¡Ã©Ã­Ã³ÃºÃ?Ã‰Ã?Ã“ÃšÃ‘Ã±\-\_,#.: ? \s])*$/";
 
 if (isset($_REQUEST['operaciones'])) {
     switch ($_REQUEST['operaciones']) {
 
         case 'registrarUsuario':
 
-            if ($verificar->verificarRegistroUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
-                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "registro.php")) {
+            if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
+                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
                     $elementos->__SET('nombres', $_REQUEST['inputNombres']);
                     $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
                     $elementos->__SET('celular', $_REQUEST['inputCelular']);
@@ -28,10 +28,52 @@ if (isset($_REQUEST['operaciones'])) {
 
                     $modelo->RegistrarUsuario($elementos);
 
-                    header('Location: login.php');
+                    header('Location: Login.php');
                 }
             }
 
+            break;
+           
+            case 'editarUsuario':
+
+            if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
+                if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
+                    $elementos->__SET('nombres', $_REQUEST['inputNombres']);
+                    $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
+                    $elementos->__SET('celular', $_REQUEST['inputCelular']);
+                    $elementos->__SET('correo', $_REQUEST['inputCorreo']);
+                    $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
+                    $elementos->__SET('idUsuarios', $_REQUEST['inputId']);
+
+                    $modelo->EditarUsuario($elementos);
+
+                    header('Location: EditarUsuario.php');
+                }
+            }
+
+            break;
+            
+            case 'veLog':
+            
+           // $elementos->__SET('idLogin', $_REQUEST['idLogin']);
+            $elementos->__SET('correo', $_REQUEST['inputCorreo']);
+            $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
+
+            if (empty($_REQUEST['inputCorreo'] && $_REQUEST['inputContrasena1'])) {
+                echo '<script>alert (" Cubre los campos vacÃ­o");</script>';
+            }else {
+                                        if (!empty($modelo->Login($elementos))) {
+                                            foreach ($modelo->Login($elementos) as $row)
+                                                $_SESSION['idUsuarios'] = $row->__GET('idUsuarios');
+                                           // header('Location: login.php?Admistrador?"' . $_SESSION['idAdministrador'] . '"');
+                                             header('Location: index.php');
+                                            
+                                        
+                                            }else {
+                                                    header('Location: Login.php?error');
+                                                }
+                                            }
+                                       
             break;
 
         case 'registrarE':
@@ -69,13 +111,55 @@ if (isset($_REQUEST['operaciones'])) {
             }
 
             break;
+            
+                    case 'editarEstadoEvento':
+
+            
+                if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE1'])) {
+
+                    $elementos->__SET('estado', 1);
+                    $elementos->__SET('idEventos', $_REQUEST['txtIdE1']);
+                   
+
+                    $modelo->EditarEstadoEvento($elementos);
+                    header('Location: Eventos.php');
+                } else {
+                    echo "<script>alert('No modifique el id del evento')</script>";
+                    header('Refresh: 0; URL= Agendar.php');
+                }
+            
+
+            break;
 
         case 'eliminarE':
 
             if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE'])) {
-
-                $modelo->EliminarE($_REQUEST['txtIdE']);
-                header('Location: Agendar.php');
+              if (preg_match("/^([0-9])*$/", $_REQUEST['txtUrl'])) {
+                    if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdE3'])) {
+                  
+                        if (empty($_REQUEST['txtIdE3'])){
+                            $modelo->EliminarE($_REQUEST['txtIdE']);
+                        } else {
+                           $modelo->EliminarE($_REQUEST['txtIdE3']); //viene de Eventos.php eliminar evento confirmado
+                        }
+                
+                
+                
+                if($_REQUEST['txtUrl'] == 1){
+                   header('Location: Eventos.php');
+                } else {
+                      header('Location: Agendar.php');
+                }
+             
+                
+                  } else {
+                echo "<script>alert('No modifique la url')</script>";
+                header('Refresh: 0; URL= Eventos.php');
+            }
+                 } else {
+                echo "<script>alert('No modifique la url')</script>";
+                header('Refresh: 0; URL= Eventos.php');
+            }
             } else {
                 echo "<script>alert('No modifique el id del evento')</script>";
                 header('Refresh: 0; URL= Agendar.php');
@@ -97,7 +181,7 @@ if (isset($_REQUEST['operaciones'])) {
                 }
             } else {
                 echo "<script>alert('Rellene todos los campos')</script>";
-                header('Refresh: 0; URL= index.php?');
+                header('Refresh: 0; URL= index.php');
             }
             break;
 
@@ -128,10 +212,10 @@ if (isset($_REQUEST['operaciones'])) {
                         $elementos->__SET('tipoP', $_REQUEST['txtTipoP']);
                         $elementos->__SET('idP', $_REQUEST['txtIdP']);
                         $modelo->EditarP($elementos);
-                        header('Location: index.php?' . $img);
+                        header('Location: index.php');
                     } else {
                         echo "<script>alert('no modifique el website')</script>";
-                        header('Refresh: 0; URL= index.php?');
+                        header('Refresh: 0; URL= index.php');
                     }
                 }
             } else {
@@ -156,11 +240,11 @@ if (isset($_REQUEST['operaciones'])) {
         //Cerrar sesion
         case 'cerrarSesion':
             session_start();
-            // Destruir todas las variables de sesión.
+            // Destruir todas las variables de sesiÃ³n.
             $_SESSION = array();
 
-            // Si se desea destruir la sesión completamente, borre también la cookie de sesión.
-            // Nota: ¡Esto destruirá la sesión, y no la información de la sesión!
+            // Si se desea destruir la sesiÃ³n completamente, borre tambiÃ©n la cookie de sesiÃ³n.
+            // Nota: Â¡Esto destruirÃ¡ la sesiÃ³n, y no la informaciÃ³n de la sesiÃ³n!
             if (ini_get("session.use_cookies")) {
                 $params = session_get_cookie_params();
                 setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]
@@ -168,7 +252,7 @@ if (isset($_REQUEST['operaciones'])) {
             }
 
             unset($_SESSION);
-            // Finalmente, destruir la sesión.
+            // Finalmente, destruir la sesiÃ³n.
             session_destroy();
             header('Location: index.php');
             break;
@@ -254,9 +338,9 @@ class Metodos {
         }
     }
 
-    public function verificarRegistroUsuarios($nombres, $apellidos, $celular, $correo, $contrasena1, $contrasena2) {
+    public function verificarRegistroEditarUsuarios($nombres, $apellidos, $celular, $correo, $contrasena1, $contrasena2) {
         if (empty($nombres && $apellidos && $celular && $correo && $contrasena1 && $contrasena2)) {
-            echo '<script>alert (" Cubre los campos vacÃ­o");</script>';
+            echo '<script>alert (" Cubre los campos vacÃƒÂ­o");</script>';
         } else {
             if (false !== filter_var($correo, FILTER_VALIDATE_EMAIL)) {
                 if (is_numeric($celular)) {
@@ -266,15 +350,15 @@ class Metodos {
                         return true;
                     } else {
                         echo '<script>alert ("No ingrese comillas");</script>';
-                        header('Refresh: 0; URL= registro.php?error');
+                        header('Refresh: 0; URL= ?error');
                     }
                 } else {
                     echo '<script>alert ("El campo celular solo acepta numeros");</script>';
-                    header('Refresh: 0; URL= registro.php?error');
+                    header('Refresh: 0; URL= ?error');
                 }
             } else {
                 echo '<script>alert ("Escribe un correo electronico valido");</script>';
-                header('Refresh: 0; URL= registro.php?error');
+                header('Refresh: 0; URL= ?error');
             }
         }
     }
@@ -285,19 +369,19 @@ class Metodos {
             header('Refresh: -1; URL= ' . $rut . '?error_password');
         } else {
             if (strlen($pass) > 16) {
-                echo "<script>alert('La clave no puede tener más de 16 caracteres')</script>";
+                echo "<script>alert('La clave no puede tener mÃ¡s de 16 caracteres')</script>";
                 header('Refresh: -1; URL= ' . $rut . '?error_password');
             } else {
                 if (!preg_match('`[a-z]`', $pass)) {
-                    echo "<script>alert('La clave debe tener al menos una letra minúscula')</script>";
+                    echo "<script>alert('La clave debe tener al menos una letra minÃºscula')</script>";
                     header('Refresh: -1; URL= ' . $rut . '?error_password');
                 } else {
                     if (!preg_match('`[A-Z]`', $pass)) {
-                        echo "<script>alert('La clave debe tener al menos una letra mayúscula')</script>";
+                        echo "<script>alert('La clave debe tener al menos una letra mayÃºscula')</script>";
                         header('Refresh: -1; URL= ' . $rut . '?error_password');
                     } else {
                         if (!preg_match('`[0-9]`', $pass)) {
-                            echo "<script>alert('La clave debe tener al menos un caracter numérico')</script>";
+                            echo "<script>alert('La clave debe tener al menos un caracter numÃ©rico')</script>";
                             header('Refresh: -1; URL=' . $rut . '?error_password');
                         } else {
                             return "1";

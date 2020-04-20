@@ -16,23 +16,23 @@ if ($_SESSION['idUsuarios'] == true) {
     foreach ($modelo->ListarUsuario($_SESSION['idUsuarios']) as $row):
         $nombreCompleto = $row->__GET('nombres') . " " . $row->__GET('apellidos');
     endforeach;
-}else{
-    $_SESSION['idUsuarios']=0;
+}else {
+    $_SESSION['idUsuarios'] = 0;
 }
 
 
 
-//Inicio Variables de validaci�n de campos
+//Inicio Variables de validación de campos
 $ex = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  \s])*$/";
 $lugV = $ex . ".test(direccionE)&& direccionE && direccionE.length >= 10";
 $exRH = "/^(?:0?[1-9]|1[0-9]|2[0-3]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)?$/.test(horaE)";
 $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240";
-//Fin Variables de validaci�n de campos
+//Fin Variables de validación de campos
 ?>
 <html>
 
     <head>
-        <meta charset=�utf8? />
+        <meta charset=”utf8? />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Super carnitas y chicharr&#243;n el profe de huetamo</title>
         <link rel="icon" type="image/png" href="assets/img/Carniceria.jpg" />
@@ -67,7 +67,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
             </div>
         </nav>
         <?php if ($_SESSION['idUsuarios'] == true) { ?>
-            <!-- Si est� registrdo -->
+            <!-- Si está registrdo -->
             <div>
                 <div class="modal left fade in" role="dialog" tabindex="-1" id="modalOpcionesEU" aria-labelledby="modalChatLabel">
                     <div class="modal-dialog" role="document">
@@ -75,7 +75,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
 
                             <div class="modal-body">
 
@@ -83,7 +83,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
 
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesión</button>
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
                                     </form>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                     </div>
                 </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo $nombreCompleto; ?></button></div>
         <?php } else { ?>
-            <!-- Si no está registrdo -->
+            <!-- Si no estÃ¡ registrdo -->
             <div>
                 <div class="modal left fade in" role="dialog" tabindex="-1" id="modalOpciones" aria-labelledby="modalChatLabel">
                     <div class="modal-dialog" role="document">
@@ -99,7 +99,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -155,13 +155,9 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class='date'>&nbsp;</div>
                         </li>
                         <span v-for="dia of dias">
-                            <li v-if="dia<=diaA+2 && mes==mesA">
-                                <div  class='date' >
-                                    {{dia}}
-                                </div>
-                            </li>
+                            
                             <?php
-                            //Extracci�n de datos de evento
+                            //Extracción de datos de evento
                             foreach ($modelo->ListarEventos() as $row):
                                 $f = explode("-", $row->__GET('fecha'));
                                 $es = $row->__GET('estado');
@@ -172,7 +168,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                 }
                                 ?>
                                 <li v-if="dia==<?php echo $f[2]; ?> && mes==<?php echo $f[1]; ?> && ano==<?php echo $f[0]; ?>">
-                                    <!-- Creare una nueva variable que almacene el dato que si cumple la condici�n -->
+                                    <!-- Creare una nueva variable que almacene el dato que si cumple la condición -->
 
                                     <div  class='date' >
                                         {{dia}}
@@ -203,6 +199,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                     <?php
                                 endforeach;
                                 ?>
+                                
                                 <a v-if="(dia>diaA+2 || mes > mesA )|| ano>anA" href='' data-bs-hover-animate='pulse' 
                                    data-toggle='modal' data-target='#<?php echo $modal; ?>' @click="abrirModal(dia)">
                                     <li>
@@ -211,6 +208,11 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                         </div>
                                     </li>
                                 </a>
+                                    <li v-else>
+                                    <div  class='date' >
+                                        {{dia}}
+                                    </div>
+                                </li>
                             </span>
                         </span>
 
@@ -225,7 +227,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <h5  style="float: left">Editar evento</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=editarE">
                                 <div class="form-group">
@@ -258,7 +260,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                         no deve superar los 240 caracteres.</p>
                                 </div>
                                 <!-- Fecha que selecciona en el calendario -->
-                                <input type="hidden"  id="txtIdU" name="txtIdU" value="2">
+                                <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
                                 <input type="hidden"  id="txtFechaE" name="txtFechaE">
                                 <input type="hidden" name="txtIdEE" id="txtIdEE">
                                 <div v-if="<?php echo $lugV; ?> && (<?php echo $exRH; ?>|| horaE) && <?php echo $desV; ?>" class="modal-footer" style="float: right">
@@ -293,7 +295,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                         <h5  style="float: left">&nbsp; Evento</h5>
                         <div class="col-10 col-lg-10 col-xl-10 padMar text-right">
                             <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                        </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                        </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
                     <div class="modal-body">
                         <form id="registrarEvento" method="post" action="?operaciones=registrarE">
                             <div class="form-group">
@@ -327,7 +329,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             </div>
                             <!-- Fecha que selecciona en el calendario -->
                             <input type="hidden"  id="txtFecha" name="txtFecha">
-                            <input type="hidden"  id="txtIdU" name="txtIdU" value="2">
+                            <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
 
                             <div v-if="<?php echo $lugV; ?> && <?php echo $exRH; ?> && <?php echo $desV; ?>" class="modal-footer" style="float: right">
                                 <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
@@ -349,7 +351,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                         <h5  style="float: left"> Eliminar evento</h5>
                         <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                             <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                        </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button>
 
                     </div>
                     <div class="modal-body">
