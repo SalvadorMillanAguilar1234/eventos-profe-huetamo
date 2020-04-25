@@ -25,8 +25,10 @@
                     <ul class="nav navbar-nav mx-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.php">Inicio</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Agendar.php">Agendar</a></li>
+                       <?php if ($_SESSION['idUsuarios'] == 1) { ?>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Eventos.php">Eventos</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.php">Acerca de</a></li>
+                        <?php }?>
+                         <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.php">Acerca de</a></li>
                     </ul>
                 </div>
             </div>
@@ -44,8 +46,11 @@
                        
              <h4>Opciones</h4>
                      
-             <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href='EditarUsuario.php' "><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button><button class="btn btn-light text-left" type="button"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesión</button>
-                           </div>
+             <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href='EditarUsuario.php' "><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
+<form method="post" action="?operaciones=cerrarSesion">
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                                    </form>
+</div>
                     </div>
                 </div>
             </div>
