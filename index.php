@@ -16,7 +16,7 @@ endforeach;
 }else{
     $_SESSION['idUsuarios']=0;
 }
-//Inicio Variables de validación de campos
+//Inicio Variables de validaciÃ³n de campos
 $exText = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  ? \s])*$/";
 $tipV = $exText . ".test(tipoP)";
 $fraV = $exText . ".test(fraceP)";
@@ -24,7 +24,11 @@ $nomV = $exText . ".test(nambreP)";
 $imgV = "/\.(jpg|png|gif)$/i.test(imagenP)";
 $imgEV = "/\.(jpg|png|gif)$/i.test(imagenEP) ";
 $desV = $exText . ".test(descripcionP)";
+<<<<<<< HEAD
 //Fin Variables de validación de campos
+=======
+//Fin Variables de validaciÃ³n de campos
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
 ?>
 <html>
 
@@ -68,7 +72,7 @@ $desV = $exText . ".test(descripcionP)";
                 
                 
                 <?php if ($_SESSION['idUsuarios'] == true) { ?>
-            <!-- Si está registrdo -->
+            <!-- Si estÃ¡ registrdo -->
             <div>
                 <?php if($_SESSION['idUsuarios']==1){?>
                 <button class="btn btn-primary pull-right fa fa-plus"
@@ -82,7 +86,11 @@ $desV = $exText . ".test(descripcionP)";
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+<<<<<<< HEAD
                                 </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+=======
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
 
                             <div class="modal-body">
 
@@ -90,7 +98,11 @@ $desV = $exText . ".test(descripcionP)";
 
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
+<<<<<<< HEAD
                                         <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
+=======
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃƒÂ³n</button>
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
                                     </form>
                                 </div>
                             </div>
@@ -98,7 +110,7 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
-            <!-- Si no estÃ¡ registrdo -->
+            <!-- Si no estÃƒÂ¡ registrdo -->
             <div>
                 <div class="modal left fade in" role="dialog" tabindex="-1" id="modalOpciones" aria-labelledby="modalChatLabel">
                     <div class="modal-dialog" role="document">
@@ -106,7 +118,11 @@ $desV = $exText . ".test(descripcionP)";
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+<<<<<<< HEAD
                                 </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+=======
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -123,9 +139,15 @@ $desV = $exText . ".test(descripcionP)";
                     <div class="product-item">
 
                         <div class="bg-faded p-5 rounded">
+<<<<<<< HEAD
                             <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr�n el profe de Huetamo"); ?></span>
                                 </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" ><?php echo utf8_encode("Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
                                     Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
+=======
+                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper">Super carnitas y chicharrÃƒÂ³n el profe de Huetamo</span>
+                                </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" >Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
+                                    Morelia, CoalcomÃƒÂ¡n, Churumuco, Huetamo y Comburindio.
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
                                 </span></h4>
                         </div>
                     </div>
@@ -146,10 +168,10 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div>
             </section>
-            <div v-show="show"><!-- Productos para tienda física -->
+            <div v-show="show"><!-- Productos para tienda fÃ­sica -->
                 <?php
                 $alternador_DL = true;
-                //Extracción de datos del producto
+                //ExtracciÃ³n de datos del producto
                 foreach ($modelo->ListarProductos("0") as $row):
                     ?>
                     <section class="page-section">
@@ -159,7 +181,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <span style="float: right">
                                     
                                        <?php
-                                       //creación de variable para extraer solo el nombre del archivo
+                                       //creaciÃ³n de variable para extraer solo el nombre del archivo
                                        $valores = explode("\ ", $row->__GET('imagenP'));
                                        $R= $valores[1];
                                        ?>
@@ -172,7 +194,7 @@ $desV = $exText . ".test(descripcionP)";
                                        <?php }?>
                                 <br><br>
                                 <div class="d-flex product-item-title">
-                                    <!-- mr cambia la dirección del mensaje a la derecha-->
+                                    <!-- mr cambia la direcciÃ³n del mensaje a la derecha-->
                                     <?php
                                     if ($alternador_DL) {
                                         $alternador_DL = false;
@@ -209,10 +231,10 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div>
             </section>
-            <div v-show="show2"><!-- Productos para tienda física -->
+            <div v-show="show2"><!-- Productos para tienda fÃ­sica -->
                 <?php
                 $alternador_DL = true;
-                //Extracción de datos del producto
+                //ExtracciÃ³n de datos del producto
                 foreach ($modelo->ListarProductos("1") as $row):
                     ?>
                     <section class="page-section">
@@ -221,7 +243,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <?php if($_SESSION['idUsuarios']==1){?>
                                 <span style="float: right">
                                     <?php
-                                       //creación de variable para extraer solo el nombre del archivo
+                                       //creaciÃ³n de variable para extraer solo el nombre del archivo
                                        $valores = explode("\ ", $row->__GET('imagenP'));
                                        $R= $valores[1];
                                        ?>
@@ -233,7 +255,7 @@ $desV = $exText . ".test(descripcionP)";
                                        > <i class="fa fa-minus-square fa-lg fa-2x" aria-hidden="true" style="color: red"></i></a></span>
                                 <?php }?><br><br>
                                 <div class="d-flex product-item-title">
-                                    <!-- mr cambia la dirección del mensaje a la derecha-->
+                                    <!-- mr cambia la direcciÃ³n del mensaje a la derecha-->
                                     <?php
                                     if ($alternador_DL) {
                                         $alternador_DL = false;
@@ -276,7 +298,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=registrarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -341,7 +363,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Editar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=editarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -379,7 +401,11 @@ $desV = $exText . ".test(descripcionP)";
                                            v-model='imagenEP'>
                                     <br>
                                     <!--Validaciones de campos--->
+<<<<<<< HEAD
                                     <p v-show="<?php echo $imgEV; ?> && imagenEP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+=======
+                                    <p v-show="!<?php echo $imgEV; ?> && imagenEP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+>>>>>>> 2f32d7250aea0e9333ec8b276f7b7a414819bfce
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>
@@ -410,7 +436,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left"> Eliminar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã—</span></button>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button>
 
                         </div>
                         <div class="modal-body">
