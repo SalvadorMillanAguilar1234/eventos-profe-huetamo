@@ -94,7 +94,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
 
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
 
                                     </form>
                                 </div>
@@ -131,9 +131,9 @@ $desV = $exText . ".test(descripcionP)";
 
                         <div class="bg-faded p-5 rounded">
 
-                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr�n el profe de Huetamo"); ?></span>
+                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr��n el profe de Huetamo"); ?></span>
                                 </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" ><?php echo utf8_encode("Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
-                                    Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
+                                    Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
 
                                 </span></h4>
                         </div>
@@ -147,7 +147,7 @@ $desV = $exText . ".test(descripcionP)";
                         <center>
                             <div class="bg-faded p-5 rounded">
                                 <a type="submit">
-                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda f�sica"); ?></span>
+                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda f�sica"); ?></span>
                                     </h2>
                                 </a>
                             </div></center>
@@ -285,7 +285,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=registrarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -350,7 +350,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Editar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=editarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -421,7 +421,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left"> Eliminar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button>
 
                         </div>
                         <div class="modal-body">
