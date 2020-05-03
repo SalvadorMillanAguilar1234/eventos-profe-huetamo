@@ -24,15 +24,14 @@ if ($_SESSION['idUsuarios'] == true) {
 
 //Inicio Variables de validación de campos
 $ex = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  \s])*$/";
-$lugV = $ex . ".test(direccionE)&& direccionE && direccionE.length >= 10";
-$exRH = "/^(?:0?[1-9]|1[0-9]|2[0-3]):[0-5][0-9]\s?(?:[aApP](\.?)[mM]\1)?$/.test(horaE)";
-$desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240";
+$lugV = $ex . ".test(direccionE)";
+$desV = $ex . ".test(descripcionE)";
 //Fin Variables de validación de campos
 ?>
 <html>
 
     <head>
-        <meta charset=”utf8? />
+        <meta charset=�?utf8? />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Super carnitas y chicharr&#243;n el profe de huetamo</title>
         <link rel="icon" type="image/png" href="assets/img/Carniceria.jpg" />
@@ -75,7 +74,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
 
                             <div class="modal-body">
 
@@ -99,7 +98,7 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -233,37 +232,32 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                                 <div class="form-group">
                                     <label>Direcci&oacute;n del evento:</label>
                                     <input type="text" class="form-control" id="txtDireccion" name="txtDireccion" placeholder="Zaragoza sur N&#176; 033" 
-                                           v-model='direccionE' required>
+                                           v-model='direccionE' minlength="10" maxlength="240" required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $lugV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas</p>
+                                    <p v-show="!<?php echo $lugV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Hora del evento:</label>
                                     <input  type="time" class="form-control" id="txtHora" name="txtHora" 
                                             v-model='horaE' required>
                                     <br>
-                                    <!--Validaciones de campos --->
-                                    <p v-if="<?php echo $exRH; ?>|| horaE" class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Estructura invalida</p>
                                 </div>
                                 <div  style="width: 100%">
                                     <label for="descripcionTarea">Descripci&#243;n del evento:</label>
                                     <textarea type="text" class="form-control" id="txtDescripcion"  name="txtDescripcion"  
                                               placeholder="Para el evento necesitar&#233; los soguientes productos: ..." 
-                                              v-model="descripcionE" required></textarea>
+                                              v-model="descripcionE" maxlength="240" required></textarea>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas. Adem&aacute;s,
+                                    <p v-show="!<?php echo $desV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas. Adem&aacute;s,
                                         no deve superar los 240 caracteres.</p>
                                 </div>
                                 <!-- Fecha que selecciona en el calendario -->
                                 <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
                                 <input type="hidden"  id="txtFechaE" name="txtFechaE">
                                 <input type="hidden" name="txtIdEE" id="txtIdEE">
-                                <div v-if="<?php echo $lugV; ?> && (<?php echo $exRH; ?>|| horaE) && <?php echo $desV; ?>" class="modal-footer" style="float: right">
+                                <div class="modal-footer" style="float: right">
                                     <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                     <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Editar"> 
                                 </div>
@@ -301,37 +295,32 @@ $desV = $ex . ".test(descripcionE)&& descripcionE && descripcionE.length <= 240"
                             <div class="form-group">
                                 <label>Direcci&oacute;n del evento:</label>
                                 <input type="text" class="form-control" id="txtDireccion" name="txtDireccion" placeholder="Zaragoza sur N&#176; 033" 
-                                       v-model='direccionE' required>
+                                       v-model='direccionE' minlength="10" maxlength="240" required>
                                 <br>
                                 <!--Validaciones de campos --->
-                                <p v-if='<?php echo $lugV; ?>' class="alert alert-success">Correcto</p>
-                                <p v-else class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas</p>
+                                <p v-show="!<?php echo $lugV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas</p>
                             </div>
                             <div class="form-group">
                                 <label>Hora del evento:</label>
                                 <input  type="time" class="form-control" id="txtHora" name="txtHora" 
                                         v-model='horaE' required>
                                 <br>
-                                <!--Validaciones de campos --->
-                                <p v-if="<?php echo $exRH; ?>" class="alert alert-success">Correcto</p>
-                                <p v-else class="alert alert-danger">Estructura invalida</p>
                             </div>
                             <div  style="width: 100%">
                                 <label for="descripcionTarea">Descripci&#243;n del evento:</label>
                                 <textarea type="text" class="form-control" id="txtDescripcion"  name="txtDescripcion"  
                                           placeholder="Para el evento necesitar&#233; los soguientes productos: ..." 
-                                          v-model="descripcionE" required></textarea>
+                                          v-model="descripcionE" maxlength="240" required></textarea>
                                 <br>
                                 <!--Validaciones de campos --->
-                                <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                <p v-else class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas. Adem&aacute;s,
+                                <p v-show="!<?php echo $desV; ?>"  class="alert alert-danger">Solo se permiten letras, n&uacutemero, guiones y comas. Adem&aacute;s,
                                     no deve superar los 240 caracteres.</p>
                             </div>
                             <!-- Fecha que selecciona en el calendario -->
                             <input type="hidden"  id="txtFecha" name="txtFecha">
                             <input type="hidden"  id="txtIdU" name="txtIdU" value="<?php echo $_SESSION['idUsuarios'] ?>">
 
-                            <div v-if="<?php echo $lugV; ?> && <?php echo $exRH; ?> && <?php echo $desV; ?>" class="modal-footer" style="float: right">
+                            <div  class="modal-footer" style="float: right">
                                 <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                 <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Registrar"> 
                             </div>
