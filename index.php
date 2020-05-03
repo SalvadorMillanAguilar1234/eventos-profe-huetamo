@@ -16,7 +16,7 @@ endforeach;
 }else{
     $_SESSION['idUsuarios']=0;
 }
-//Inicio Variables de validaciÃ³n de campos
+//Inicio Variables de validaciÃƒÂ³n de campos
 $exText = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  ? \s])*$/";
 $tipV = $exText . ".test(tipoP)";
 $fraV = $exText . ".test(fraceP)";
@@ -25,7 +25,7 @@ $imgV = "/\.(jpg|png|gif)$/i.test(imagenP)";
 $imgEV = "/\.(jpg|png|gif)$/i.test(imagenEP) ";
 $desV = $exText . ".test(descripcionP)";
 
-//Fin Variables de validación de campos
+//Fin Variables de validaciÃ³n de campos
 ?>
 <html>
 
@@ -69,7 +69,7 @@ $desV = $exText . ".test(descripcionP)";
                 
                 
                 <?php if ($_SESSION['idUsuarios'] == true) { ?>
-            <!-- Si estÃ¡ registrdo -->
+            <!-- Si estÃƒÂ¡ registrdo -->
             <div>
                 <?php if($_SESSION['idUsuarios']==1){?>
                 <button class="btn btn-primary pull-right fa fa-plus"
@@ -84,7 +84,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
 
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬?</span></button></div>
 
 
                             <div class="modal-body">
@@ -94,7 +94,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
 
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesión');?></button>
 
                                     </form>
                                 </div>
@@ -103,7 +103,7 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
-            <!-- Si no estÃƒÂ¡ registrdo -->
+            <!-- Si no estÃƒÆ’Ã‚Â¡ registrdo -->
             <div>
                 <div class="modal left fade in" role="dialog" tabindex="-1" id="modalOpciones" aria-labelledby="modalChatLabel">
                     <div class="modal-dialog" role="document">
@@ -112,7 +112,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
 
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬ï¿½?</span></button></div>
 
                             <div class="modal-body">
                                 <h4>Opciones</h4>
@@ -131,9 +131,9 @@ $desV = $exText . ".test(descripcionP)";
 
                         <div class="bg-faded p-5 rounded">
 
-                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr��n el profe de Huetamo"); ?></span>
+                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharrón el profe de Huetamo"); ?></span>
                                 </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" ><?php echo utf8_encode("Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
-                                    Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
+                                    Morelia, Coalcomán, Churumuco, Huetamo y Comburindio.") ?>
 
                                 </span></h4>
                         </div>
@@ -147,7 +147,7 @@ $desV = $exText . ".test(descripcionP)";
                         <center>
                             <div class="bg-faded p-5 rounded">
                                 <a type="submit">
-                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda f�sica"); ?></span>
+                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda física"); ?></span>
                                     </h2>
                                 </a>
                             </div></center>
@@ -155,10 +155,10 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div>
             </section>
-            <div v-show="show"><!-- Productos para tienda fÃ­sica -->
+            <div v-show="show"><!-- Productos para tienda fÃƒÂ­sica -->
                 <?php
                 $alternador_DL = true;
-                //ExtracciÃ³n de datos del producto
+                //ExtracciÃƒÂ³n de datos del producto
                 foreach ($modelo->ListarProductos("0") as $row):
                     ?>
                     <section class="page-section">
@@ -168,7 +168,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <span style="float: right">
                                     
                                        <?php
-                                       //creaciÃ³n de variable para extraer solo el nombre del archivo
+                                       //creaciÃƒÂ³n de variable para extraer solo el nombre del archivo
                                        $valores = explode("\ ", $row->__GET('imagenP'));
                                        $R= $valores[1];
                                        ?>
@@ -181,7 +181,7 @@ $desV = $exText . ".test(descripcionP)";
                                        <?php }?>
                                 <br><br>
                                 <div class="d-flex product-item-title">
-                                    <!-- mr cambia la direcciÃ³n del mensaje a la derecha-->
+                                    <!-- mr cambia la direcciÃƒÂ³n del mensaje a la derecha-->
                                     <?php
                                     if ($alternador_DL) {
                                         $alternador_DL = false;
@@ -218,10 +218,10 @@ $desV = $exText . ".test(descripcionP)";
                     </div>
                 </div>
             </section>
-            <div v-show="show2"><!-- Productos para tienda fÃ­sica -->
+            <div v-show="show2"><!-- Productos para tienda fÃƒÂ­sica -->
                 <?php
                 $alternador_DL = true;
-                //ExtracciÃ³n de datos del producto
+                //ExtracciÃƒÂ³n de datos del producto
                 foreach ($modelo->ListarProductos("1") as $row):
                     ?>
                     <section class="page-section">
@@ -230,7 +230,7 @@ $desV = $exText . ".test(descripcionP)";
                                 <?php if($_SESSION['idUsuarios']==1){?>
                                 <span style="float: right">
                                     <?php
-                                       //creaciÃ³n de variable para extraer solo el nombre del archivo
+                                       //creaciÃƒÂ³n de variable para extraer solo el nombre del archivo
                                        $valores = explode("\ ", $row->__GET('imagenP'));
                                        $R= $valores[1];
                                        ?>
@@ -242,7 +242,7 @@ $desV = $exText . ".test(descripcionP)";
                                        > <i class="fa fa-minus-square fa-lg fa-2x" aria-hidden="true" style="color: red"></i></a></span>
                                 <?php }?><br><br>
                                 <div class="d-flex product-item-title">
-                                    <!-- mr cambia la direcciÃ³n del mensaje a la derecha-->
+                                    <!-- mr cambia la direcciÃƒÂ³n del mensaje a la derecha-->
                                     <?php
                                     if ($alternador_DL) {
                                         $alternador_DL = false;
@@ -285,7 +285,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=registrarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -350,7 +350,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left">Editar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
                         <div class="modal-body">
                             <form id="registrarEvento" method="post" action="?operaciones=editarP" enctype="multipart/form-data">
                                 <div class="form-group">
@@ -421,7 +421,7 @@ $desV = $exText . ".test(descripcionP)";
                             <h5  style="float: left"> Eliminar producto</h5>
                             <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
                                 <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button>
 
                         </div>
                         <div class="modal-body">
