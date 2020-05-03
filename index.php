@@ -18,18 +18,19 @@ endforeach;
 }
 //Inicio Variables de validación de campos
 $exText = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  ? \s])*$/";
-$tipV = $exText . ".test(tipoP)&& tipoP";
-$fraV = $exText . ".test(fraceP)&& fraceP";
-$nomV = $exText . ".test(nambreP)&& nambreP";
-$imgV = "/\.(jpg|png|gif)$/i.test(imagenP)&& imagenP";
+$tipV = $exText . ".test(tipoP)";
+$fraV = $exText . ".test(fraceP)";
+$nomV = $exText . ".test(nambreP)";
+$imgV = "/\.(jpg|png|gif)$/i.test(imagenP)";
 $imgEV = "/\.(jpg|png|gif)$/i.test(imagenEP) ";
-$desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 240";
+$desV = $exText . ".test(descripcionP)";
 //Fin Variables de validación de campos
 ?>
 <html>
 
     <head>
-        <meta charset="utf-8">
+        
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Super carnitas y chicharr&#243;n el profe de huetamo</title>
         <link rel="icon" type="image/png" href="assets/img/Carniceria.jpg" />
@@ -81,7 +82,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
 
                             <div class="modal-body">
 
@@ -89,13 +90,13 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
 
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃ³n</button>
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo $nombreCompleto; ?></button></div>
+                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
             <!-- Si no estÃ¡ registrdo -->
             <div>
@@ -105,7 +106,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -122,9 +123,9 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                     <div class="product-item">
 
                         <div class="bg-faded p-5 rounded">
-                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper">Super carnitas y chicharrÃ³n el profe de Huetamo</span>
-                                </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" >Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
-                                    Morelia, CoalcomÃ¡n, Churumuco, Huetamo y Comburindio.
+                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr�n el profe de Huetamo"); ?></span>
+                                </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" ><?php echo utf8_encode("Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
+                                    Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
                                 </span></h4>
                         </div>
                     </div>
@@ -137,7 +138,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                         <center>
                             <div class="bg-faded p-5 rounded">
                                 <a type="submit">
-                                    <h2 class="section-heading mb-0"><span class="section-heading-upper">Productos en tienda f&iacute;sica</span>
+                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda f�sica"); ?></span>
                                     </h2>
                                 </a>
                             </div></center>
@@ -245,11 +246,11 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                             <div class="d-flex ml-auto bg-faded p-5 rounded">
                                             <?php }
                                             ?>
-                                            <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo $row->__GET('frase'); ?></span><span class="section-heading-lower"><?php echo $row->__GET('nombreP'); ?></span></h2>
+                                            <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode($row->__GET('frase')); ?></span><span class="section-heading-lower"><?php echo utf8_encode($row->__GET('nombreP')); ?></span></h2>
                                         </div>
                                     </div><img class="img-fluid d-flex mx-auto product-item-img mb-3 mb-lg-0 rounded" src="<?php echo $row->__GET('imagenP'); ?>">
                                     <div class="bg-faded p-5 rounded">
-                                        <p class="mb-0"><?php echo nl2br($row->__GET('descripcionP')); ?></p>
+                                        <p class="mb-0"><?php echo utf8_encode(nl2br($row->__GET('descripcionP'))); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -289,18 +290,14 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                             <input type="radio"  id="txtTipoP" name="txtTipoP" v-model='tipoP' value="1"> Para eventos
                                         </div>
                                     </div><br>
-                                    <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $tipV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
-                                </div>
+                                   </div>
                                 <div class="form-group">
                                     <label>Frace para el producto:</label>
                                     <input type="text" class="form-control" id="txtFraceP" name="txtFraceP" placeholder="Las mejores, las inigualables, Los m&uacute;s crujientes de la regi&oacute;n" 
                                            v-model='fraceP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $fraV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $fraV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Nombre para el producto:</label>
@@ -308,8 +305,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='nambreP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $nomV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $nomV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto para el producto:</label>
@@ -317,19 +313,17 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='imagenP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $imgV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+                                    <p v-show="!<?php echo $imgV; ?> && imagenP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>
                                     <textarea type="text" class="form-control" id="txtDescripcionP" name="txtDescripcionP" placeholder="En super carnitas el profe de huetamo le ofrecemos las mejores carnitas. El precio por kg es de $100 pesos." 
-                                              v-model='descripcionP' required></textarea>
+                                              v-model='descripcionP' maxlength="240" required></textarea>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $desV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
-                                <div v-if="<?php echo $fraV . "&&" . $nomV . "&&" . $imgV . "&&" . $desV . "&&" . $tipV; ?>" class="modal-footer" style="float: right">
+                                <div  class="modal-footer" style="float: right">
                                     <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                     <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Registrar"> 
                                 </div>
@@ -362,8 +356,6 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                         </div>
                                     </div><br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $tipV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Frace para el producto:</label>
@@ -371,8 +363,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='fraceP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $fraV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $fraV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Nombre para el producto:</label>
@@ -380,8 +371,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='nambreP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $nomV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $nomV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto para el producto:</label>
@@ -389,23 +379,20 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='imagenEP'>
                                     <br>
                                     <!--Validaciones de campos--->
-                                    
-                                    <p v-show='!imagenEP' class="alert alert-success">Si no seleccionas otra imagen se quedara la anterios y es correcto</p>
-                                    <p v-if='<?php echo $imgEV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+                                    <p v-show="<?php echo $imgEV; ?> && imagenEP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>
                                     <textarea type="text" class="form-control" id="txtDescripcionP" name="txtDescripcionP" placeholder="En super carnitas el profe de huetamo le ofrecemos las mejores carnitas. El precio por kg es de $100 pesos." 
-                                              v-model='descripcionP' required></textarea>
+                                              v-model='descripcionP' maxlength="240" required></textarea>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $desV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <input type="hidden" name="txtIdP" id="txtIdP">
                                 <input type="hidden" name="txtImagenEP" id="txtImagenEP">
-                                <div v-if="<?php echo $fraV . "&&" . $nomV . "&&" . $desV . "&&" . $tipV; ?>" class="modal-footer" style="float: right">
+                                
+                                <div  class="modal-footer" style="float: right">
                                     <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                     <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Editar"> 
                                 </div>

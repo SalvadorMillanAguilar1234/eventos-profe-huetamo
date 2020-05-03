@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <?php
-
 require_once 'Entidad.php';
 require_once 'Modelo.php';
 require_once 'Controlador.php';
 
 error_reporting(E_ALL ^ E_NOTICE);
-
-$exEmail = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.([a-zA-Z]{2,4})+$/";
-$exPassword = "/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{6,16}$/";
-$emailV = $exEmail . ".test(email) && email";
-$passwordV = $exPassword . ".test(password) && password";
 ?>
 <html>
 
@@ -39,9 +33,9 @@ $passwordV = $exPassword . ".test(password) && password";
                     <ul class="nav navbar-nav mx-auto">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="index.php">Inicio</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="Agendar.php">Agendar</a></li>
-                        <?php if ($_SESSION['idUsuarios'] == 1) { ?>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="Eventos.php">Eventos</a></li>
-                        <?php }?>
+<?php if ($_SESSION['idUsuarios'] == 1) { ?>
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="Eventos.php">Eventos</a></li>
+                        <?php } ?>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="AcercaDe.php">Acerca de</a></li>
                     </ul>
                 </div>
@@ -59,12 +53,8 @@ $passwordV = $exPassword . ".test(password) && password";
 
                             <input class="form-control" type="email" v-model="email" name="inputCorreo" id="inputCorreo" required="" placeholder="Correo" autofocus="">
                             <br>
-                            <p v-if='<?php echo $emailV; ?>' class="alert alert-success">Correcto</p>
-                            <p v-else class="alert alert-danger">La estructura del email es incorrecta.</p>      
                             <input class="form-control" type="password" v-model="password" name="inputContrasena1" id="inputContrasena1" required="" placeholder="Contraseña">
                             <br>
-                            <p v-if='<?php echo $passwordV; ?>' class="alert alert-success">Correcto</p>
-                            <p v-else class="alert alert-danger">Debe incluir almenos una letra mayuscura y min&#250;scula, un n&#250;mero, tiene que ser mayor a 6 y menor a 16</p>  
 
                             <div
                                 class="checkbox">

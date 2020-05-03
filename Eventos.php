@@ -73,7 +73,7 @@ endforeach;
                     </div>
                 </div>
             </div>
-        </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo $nombreCompleto; ?></button></div>
+        </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
     
        
         <div class="modal left fade in" role="dialog" tabindex="-1" id="modalDetallesConfirmados" aria-labelledby="modalChatLabel">
@@ -219,9 +219,9 @@ function confirmation() {
     <tr>
       <td><?php echo $row->__GET('fecha'); ?></td>
       <td><?php echo $row->__GET('hora'); ?></td>
-      <td><?php echo $row->__GET('direccion'); ?></td>
-      <td><?php echo $row1->__GET('nombres')." ".$row1->__GET('apellidos'); ?></td>
-      <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE('<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo $row->__GET('descripcion'); ?>')"></button></td>
+      <td><?php echo utf8_encode($row->__GET('direccion')); ?></td>
+      <td><?php echo utf8_encode($row1->__GET('nombres')." ".$row1->__GET('apellidos')); ?></td>
+      <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE('<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo utf8_encode($row->__GET('descripcion')); ?>')"></button></td>
 <!--Eliminar-->
       <td><button  class="btn btn-primary fa fa-times" type="button" onclick="abrirModalEminarE('<?php echo $row->__GET('idEventos'); ?>')"></button></td>
     </tr>
@@ -255,9 +255,9 @@ function confirmation() {
     <tr>
       <td><?php echo $row->__GET('fecha'); ?></td>
       <td><?php echo $row->__GET('hora'); ?></td>
-      <td><?php echo $row->__GET('direccion'); ?></td>
-      <td><?php echo $row1->__GET('nombres')." ".$row1->__GET('apellidos'); ?></td>
-       <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE1('<?php echo $row->__GET('idEventos'); ?>','<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo $row->__GET('descripcion'); ?>')"></button></td>
+      <td><?php echo utf8_encode($row->__GET('direccion')); ?></td>
+      <td><?php echo utf8_encode($row1->__GET('nombres')." ".$row1->__GET('apellidos')); ?></td>
+       <td><button  class="btn btn-primary fa fa-address-card-o" type="button" onclick="abrirMConfE1('<?php echo $row->__GET('idEventos'); ?>','<?php echo $row1->__GET('correo'); ?>','<?php echo $row1->__GET('celular'); ?>','<?php echo utf8_encode($row->__GET('descripcion')); ?>')"></button></td>
     </tr>
     <?php endforeach;
           endforeach;

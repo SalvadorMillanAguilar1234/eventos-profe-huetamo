@@ -20,8 +20,8 @@ if (isset($_REQUEST['operaciones'])) {
 
             if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
                 if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
-                    $elementos->__SET('nombres', $_REQUEST['inputNombres']);
-                    $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
+                    $elementos->__SET('nombres', utf8_decode($_REQUEST['inputNombres']));
+                    $elementos->__SET('apellidos', utf8_decode($_REQUEST['inputApellidos']));
                     $elementos->__SET('celular', $_REQUEST['inputCelular']);
                     $elementos->__SET('correo', $_REQUEST['inputCorreo']);
                     $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
@@ -38,8 +38,8 @@ if (isset($_REQUEST['operaciones'])) {
 
             if ($verificar->verificarRegistroEditarUsuarios($_REQUEST['inputNombres'], $_REQUEST['inputApellidos'], $_REQUEST['inputCelular'], $_REQUEST['inputCorreo'], $_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'])) {
                 if ($verificar->verificarPassword($_REQUEST['inputContrasena1'], $_REQUEST['inputContrasena2'], "Registro.php")) {
-                    $elementos->__SET('nombres', $_REQUEST['inputNombres']);
-                    $elementos->__SET('apellidos', $_REQUEST['inputApellidos']);
+                    $elementos->__SET('nombres', utf8_decode($_REQUEST['inputNombres']));
+                    $elementos->__SET('apellidos', utf8_decode($_REQUEST['inputApellidos']));
                     $elementos->__SET('celular', $_REQUEST['inputCelular']);
                     $elementos->__SET('correo', $_REQUEST['inputCorreo']);
                     $elementos->__SET('contrasena', $_REQUEST['inputContrasena1']);
@@ -78,14 +78,14 @@ if (isset($_REQUEST['operaciones'])) {
 
         case 'registrarE':
 
-            if ($verificar->verificarRE($_REQUEST['txtIdU'], $_REQUEST['txtFecha'], $_REQUEST['txtHora'], utf8_decode($_REQUEST['txtDireccion']), utf8_decode($_REQUEST['txtDescripcion']), $exR)) {
+            if ($verificar->verificarRE($_REQUEST['txtIdU'], $_REQUEST['txtFecha'], $_REQUEST['txtHora'], $_REQUEST['txtDireccion'],$_REQUEST['txtDescripcion'], $exR)) {
 
                 $elementos->__SET('idUsuario', $_REQUEST['txtIdU']);
                 $elementos->__SET('fecha', $_REQUEST['txtFecha']);
                 $elementos->__SET('hora', $_REQUEST['txtHora']);
-                $elementos->__SET('direccion', $_REQUEST['txtDireccion']);
+                $elementos->__SET('direccion', utf8_decode($_REQUEST['txtDireccion']));
                 $elementos->__SET('estado', 0);
-                $elementos->__SET('descripcion', $_REQUEST['txtDescripcion']);
+                $elementos->__SET('descripcion', utf8_decode($_REQUEST['txtDescripcion']));
                 $modelo->RegistrarE($elementos);
                 header('Location: Agendar.php');
             }
@@ -94,12 +94,12 @@ if (isset($_REQUEST['operaciones'])) {
 
         case 'editarE':
 
-            if ($verificar->verificarRE($_REQUEST['txtIdU'], $_REQUEST['txtFechaE'], $_REQUEST['txtHora'], utf8_decode($_REQUEST['txtDireccion']), utf8_decode($_REQUEST['txtDescripcion']), $exR)) {
+            if ($verificar->verificarRE($_REQUEST['txtIdU'], $_REQUEST['txtFechaE'], $_REQUEST['txtHora'], $_REQUEST['txtDireccion'], $_REQUEST['txtDescripcion'], $exR)) {
                 if (preg_match("/^([0-9])*$/", $_REQUEST['txtIdEE'])) {
 
                     $elementos->__SET('hora', $_REQUEST['txtHora']);
-                    $elementos->__SET('direccion', $_REQUEST['txtDireccion']);
-                    $elementos->__SET('descripcion', $_REQUEST['txtDescripcion']);
+                    $elementos->__SET('direccion', utf8_decode($_REQUEST['txtDireccion']));
+                    $elementos->__SET('descripcion', utf8_decode($_REQUEST['txtDescripcion']));
                     $elementos->__SET('idEventos', $_REQUEST['txtIdEE']);
 
                     $modelo->EditarE($elementos);
@@ -171,10 +171,10 @@ if (isset($_REQUEST['operaciones'])) {
             if (isset($_REQUEST['txtTipoP'])) {
                 if ($verificar->validarCP(utf8_decode($_REQUEST['txtTipoP']), utf8_decode($_REQUEST['txtFraceP']), utf8_decode($_REQUEST['txtNombreP']), "txtImagenP", utf8_decode($_REQUEST['txtDescripcionP']), $exR)) {
 
-                    $elementos->__SET('frase', $_REQUEST['txtFraceP']);
-                    $elementos->__SET('nombreP', $_REQUEST['txtNombreP']);
+                    $elementos->__SET('frase', utf8_decode($_REQUEST['txtFraceP']));
+                    $elementos->__SET('nombreP', utf8_decode($_REQUEST['txtNombreP']));
                     $elementos->__SET('imagenP', $verificar->registrarImg("txtImagenP"));
-                    $elementos->__SET('descripcionP', $_REQUEST['txtDescripcionP']);
+                    $elementos->__SET('descripcionP', utf8_decode($_REQUEST['txtDescripcionP']));
                     $elementos->__SET('tipoP', $_REQUEST['txtTipoP']);
                     $modelo->RegistrarP($elementos);
                     header('Location: index.php');
@@ -206,9 +206,9 @@ if (isset($_REQUEST['operaciones'])) {
                         $elementos->__SET('imagenP', $verificar->registrarImg($img));
                     }
                     if ($img != 2) {
-                        $elementos->__SET('frase', $_REQUEST['txtFraceP']);
-                        $elementos->__SET('nombreP', $_REQUEST['txtNombreP']);
-                        $elementos->__SET('descripcionP', $_REQUEST['txtDescripcionP']);
+                        $elementos->__SET('frase', utf8_decode($_REQUEST['txtFraceP']));
+                        $elementos->__SET('nombreP', utf8_decode($_REQUEST['txtNombreP']));
+                        $elementos->__SET('descripcionP', utf8_decode($_REQUEST['txtDescripcionP']));
                         $elementos->__SET('tipoP', $_REQUEST['txtTipoP']);
                         $elementos->__SET('idP', $_REQUEST['txtIdP']);
                         $modelo->EditarP($elementos);
