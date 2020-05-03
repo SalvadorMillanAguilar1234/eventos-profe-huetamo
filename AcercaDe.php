@@ -75,7 +75,7 @@ endforeach;
                             </div>
                         </div>
                     </div>
-                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo $nombreCompleto; ?></button></div>
+                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
             <!-- Si no está registrdo -->
             <div>

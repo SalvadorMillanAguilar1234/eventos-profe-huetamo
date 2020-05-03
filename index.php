@@ -24,12 +24,14 @@ $nomV = $exText . ".test(nambreP)";
 $imgV = "/\.(jpg|png|gif)$/i.test(imagenP)";
 $imgEV = "/\.(jpg|png|gif)$/i.test(imagenEP) ";
 $desV = $exText . ".test(descripcionP)";
-//Fin Variables de validaciÃ³n de campos
+
+//Fin Variables de validación de campos
 ?>
 <html>
 
     <head>
-        <meta charset="utf-8">
+        
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <title>Super carnitas y chicharr&#243;n el profe de huetamo</title>
         <link rel="icon" type="image/png" href="assets/img/Carniceria.jpg" />
@@ -81,7 +83,9 @@ $desV = $exText . ".test(descripcionP)";
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+
                                 </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
+
 
                             <div class="modal-body">
 
@@ -89,13 +93,15 @@ $desV = $exText . ".test(descripcionP)";
 
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button  class="btn btn-light text-left" type="button" onclick=" location.href = 'EditarUsuario.php'"><i class="fa fa-pencil"></i>&nbsp;Editar usuario</button>
                                     <form method="post" action="?operaciones=cerrarSesion">
-                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;Cerrar sesiÃƒÂ³n</button>
+
+                                        <button class="btn btn-light text-left" type="submit" style="width: 100%"><i class="fa fa-power-off"></i>&nbsp;<?php echo utf8_encode('Cerrar sesi�n');?></button>
+
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo $nombreCompleto; ?></button></div>
+                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
             <!-- Si no estÃƒÂ¡ registrdo -->
             <div>
@@ -105,7 +111,9 @@ $desV = $exText . ".test(descripcionP)";
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">ÃƒÆ’Ã¢â‚¬â€?</span></button></div>
+
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
+
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -122,9 +130,11 @@ $desV = $exText . ".test(descripcionP)";
                     <div class="product-item">
 
                         <div class="bg-faded p-5 rounded">
-                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper">Super carnitas y chicharrÃƒÂ³n el profe de Huetamo</span>
-                                </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" >Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
-                                    Morelia, CoalcomÃƒÂ¡n, Churumuco, Huetamo y Comburindio.
+
+                            <center><h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Super carnitas y chicharr�n el profe de Huetamo"); ?></span>
+                                </h2></center> <br><h4 align="justify"> <span class="section-heading-lower" ><?php echo utf8_encode("Ofrecemos el mejor servicio de carnitas para cualquier tipo de evento. Y estamos disponibles en:
+                                    Morelia, Coalcom�n, Churumuco, Huetamo y Comburindio.") ?>
+
                                 </span></h4>
                         </div>
                     </div>
@@ -137,7 +147,7 @@ $desV = $exText . ".test(descripcionP)";
                         <center>
                             <div class="bg-faded p-5 rounded">
                                 <a type="submit">
-                                    <h2 class="section-heading mb-0"><span class="section-heading-upper">Productos en tienda f&iacute;sica</span>
+                                    <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode("Productos en tienda f�sica"); ?></span>
                                     </h2>
                                 </a>
                             </div></center>
@@ -245,11 +255,11 @@ $desV = $exText . ".test(descripcionP)";
                                             <div class="d-flex ml-auto bg-faded p-5 rounded">
                                             <?php }
                                             ?>
-                                            <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo $row->__GET('frase'); ?></span><span class="section-heading-lower"><?php echo $row->__GET('nombreP'); ?></span></h2>
+                                            <h2 class="section-heading mb-0"><span class="section-heading-upper"><?php echo utf8_encode($row->__GET('frase')); ?></span><span class="section-heading-lower"><?php echo utf8_encode($row->__GET('nombreP')); ?></span></h2>
                                         </div>
                                     </div><img class="img-fluid d-flex mx-auto product-item-img mb-3 mb-lg-0 rounded" src="<?php echo $row->__GET('imagenP'); ?>">
                                     <div class="bg-faded p-5 rounded">
-                                        <p class="mb-0"><?php echo nl2br($row->__GET('descripcionP')); ?></p>
+                                        <p class="mb-0"><?php echo utf8_encode(nl2br($row->__GET('descripcionP'))); ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -378,7 +388,9 @@ $desV = $exText . ".test(descripcionP)";
                                            v-model='imagenEP'>
                                     <br>
                                     <!--Validaciones de campos--->
+
                                     <p v-show="!<?php echo $imgEV; ?> && imagenEP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>

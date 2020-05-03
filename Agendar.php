@@ -27,6 +27,7 @@ $ex = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  \s])*$/";
 $lugV = $ex . ".test(direccionE)";
 $desV = $ex . ".test(descripcionE)";
 //Fin Variables de validación de campos
+header("Content-Type: text/html;charset=utf-8");
 ?>
 <html>
 
@@ -88,7 +89,7 @@ $desV = $ex . ".test(descripcionE)";
                             </div>
                         </div>
                     </div>
-                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo $nombreCompleto; ?></button></div>
+                </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpcionesEU" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
         <?php } else { ?>
             <!-- Si no estÃ¡ registrdo -->
             <div>
@@ -178,7 +179,7 @@ $desV = $ex . ".test(descripcionE)";
                                                    aria-hidden="true" data-toggle='modal' data-target='#modalEliminarE' @click="abrirMEE(<?php echo $row->__GET('idEventos'); ?>)"
                                                    > <i class="fa fa-minus-square fa-lg fa-2x" aria-hidden="true" style="color: red"></i></a>
                                                 <a v-if="!<?php echo $es; ?> && <?php echo $_SESSION['idUsuarios']; ?> == <?php echo $row->__GET('idUsuario'); ?>" href='' data-bs-hover-animate='pulse'
-                                                   aria-hidden="true" data-toggle='modal' data-target='#modalEditarE' @click="abrirMEditE('<?php echo $row->__GET('direccion'); ?>','<?php echo $row->__GET('hora'); ?>','<?php echo str_replace("\r\n", "<br>", $row->__GET('descripcion')); ?>','<?php echo $row->__GET('idEventos'); ?>',dia)"
+                                                   aria-hidden="true" data-toggle='modal' data-target='#modalEditarE' @click="abrirMEditE('<?php echo utf8_encode($row->__GET('direccion')); ?>','<?php echo $row->__GET('hora'); ?>','<?php echo utf8_encode(str_replace("\r\n", "<br>", $row->__GET('descripcion'))); ?>','<?php echo $row->__GET('idEventos'); ?>',dia)"
                                                    > <i class="fa fa-pencil-square fa-lg fa-2x" aria-hidden="true" style="color: blue"></i></a>
                                                 <!-- Eliminar evento--></div>
                                             <div class="col-3">

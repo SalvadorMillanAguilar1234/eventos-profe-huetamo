@@ -82,7 +82,7 @@ endforeach;
                         </div>
                     </div>
                 </div>
-            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo $nombreCompleto; ?></button></div>
+            </div><button class="btn btn-primary pull-right" data-bs-hover-animate="pulse" data-toggle="modal" data-target="#modalOpciones" type="button"><?php echo utf8_encode($nombreCompleto); ?></button></div>
 
 
             <div id="validaciones">
@@ -97,7 +97,7 @@ endforeach;
                                por eso se hizo un llamado automático a la funcion la primera vez que enpre al sito, la variable interruptor
                                fue ocultar-->
                     <div v-if='!ocultar'>
-                    {{enviar('<?php echo $row->__GET('nombres'); ?>','<?php echo $row->__GET('apellidos'); ?>',
+                    {{enviar('<?php echo utf8_encode($row->__GET('nombres')); ?>','<?php echo utf8_encode($row->__GET('apellidos')); ?>',
                              '<?php echo $row->__GET('celular'); ?>','<?php echo $row->__GET('correo'); ?>',
                              '<?php echo $row->__GET('contrasena'); ?>')}}
                      <!-- al asignar el valor de 1 a el dato ocultar, ya nunca más ara la acci´n de reasignar los valores de la BD-->
