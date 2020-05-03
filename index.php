@@ -18,12 +18,12 @@ endforeach;
 }
 //Inicio Variables de validación de campos
 $exText = "/^([0-9a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF\-\_,#.:  ? \s])*$/";
-$tipV = $exText . ".test(tipoP)&& tipoP";
-$fraV = $exText . ".test(fraceP)&& fraceP";
-$nomV = $exText . ".test(nambreP)&& nambreP";
-$imgV = "/\.(jpg|png|gif)$/i.test(imagenP)&& imagenP";
+$tipV = $exText . ".test(tipoP)";
+$fraV = $exText . ".test(fraceP)";
+$nomV = $exText . ".test(nambreP)";
+$imgV = "/\.(jpg|png|gif)$/i.test(imagenP)";
 $imgEV = "/\.(jpg|png|gif)$/i.test(imagenEP) ";
-$desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 240";
+$desV = $exText . ".test(descripcionP)";
 //Fin Variables de validación de campos
 ?>
 <html>
@@ -81,7 +81,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
 
                             <div class="modal-body">
 
@@ -105,7 +105,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                             <div class="modal-header">
                                 <div class="col-12 col-lg-12 col-xl-12 padMar text-right">
                                     <h5 class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
-                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€”</span></button></div>
+                                </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ãƒâ€�?</span></button></div>
                             <div class="modal-body">
                                 <h4>Opciones</h4>
                                 <div class="btn-group-vertical mx-auto d-block" role="group"><button class="btn btn-light text-left" type="button" onclick=" location.href = 'Registro.php'"><i class="fa fa-user-circle"></i>&nbsp;Registrarse</button>
@@ -289,18 +289,14 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                             <input type="radio"  id="txtTipoP" name="txtTipoP" v-model='tipoP' value="1"> Para eventos
                                         </div>
                                     </div><br>
-                                    <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $tipV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
-                                </div>
+                                   </div>
                                 <div class="form-group">
                                     <label>Frace para el producto:</label>
                                     <input type="text" class="form-control" id="txtFraceP" name="txtFraceP" placeholder="Las mejores, las inigualables, Los m&uacute;s crujientes de la regi&oacute;n" 
                                            v-model='fraceP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $fraV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $fraV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Nombre para el producto:</label>
@@ -308,8 +304,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='nambreP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $nomV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $nomV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto para el producto:</label>
@@ -317,19 +312,17 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='imagenP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $imgV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+                                    <p v-show="!<?php echo $imgV; ?> && imagenP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>
                                     <textarea type="text" class="form-control" id="txtDescripcionP" name="txtDescripcionP" placeholder="En super carnitas el profe de huetamo le ofrecemos las mejores carnitas. El precio por kg es de $100 pesos." 
-                                              v-model='descripcionP' required></textarea>
+                                              v-model='descripcionP' maxlength="240" required></textarea>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $desV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
-                                <div v-if="<?php echo $fraV . "&&" . $nomV . "&&" . $imgV . "&&" . $desV . "&&" . $tipV; ?>" class="modal-footer" style="float: right">
+                                <div  class="modal-footer" style="float: right">
                                     <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                     <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Registrar"> 
                                 </div>
@@ -362,8 +355,6 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                         </div>
                                     </div><br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $tipV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Frace para el producto:</label>
@@ -371,8 +362,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='fraceP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $fraV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $fraV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Nombre para el producto:</label>
@@ -380,8 +370,7 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='nambreP' required>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $nomV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $nomV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Foto para el producto:</label>
@@ -389,23 +378,20 @@ $desV = $exText . ".test(descripcionP)&& descripcionP && descripcionP.length <= 
                                            v-model='imagenEP'>
                                     <br>
                                     <!--Validaciones de campos--->
-                                    
-                                    <p v-show='!imagenEP' class="alert alert-success">Si no seleccionas otra imagen se quedara la anterios y es correcto</p>
-                                    <p v-if='<?php echo $imgEV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
+                                    <p v-show="<?php echo $imgEV; ?> && imagenEP" class="alert alert-danger">Solo se aceptan imagenes .jpg, .png y gif</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Descripci&oacute;n para el producto:</label>
                                     <textarea type="text" class="form-control" id="txtDescripcionP" name="txtDescripcionP" placeholder="En super carnitas el profe de huetamo le ofrecemos las mejores carnitas. El precio por kg es de $100 pesos." 
-                                              v-model='descripcionP' required></textarea>
+                                              v-model='descripcionP' maxlength="240" required></textarea>
                                     <br>
                                     <!--Validaciones de campos --->
-                                    <p v-if='<?php echo $desV; ?>' class="alert alert-success">Correcto</p>
-                                    <p v-else class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
+                                    <p v-show="!<?php echo $desV; ?>" class="alert alert-danger">Solo se permiten letras, n&uacute;mero, guiones, signos de interrogaci&oacute;n y comas</p>
                                 </div>
                                 <input type="hidden" name="txtIdP" id="txtIdP">
                                 <input type="hidden" name="txtImagenEP" id="txtImagenEP">
-                                <div v-if="<?php echo $fraV . "&&" . $nomV . "&&" . $desV . "&&" . $tipV; ?>" class="modal-footer" style="float: right">
+                                
+                                <div  class="modal-footer" style="float: right">
                                     <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
                                     <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Editar"> 
                                 </div>
