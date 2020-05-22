@@ -98,6 +98,32 @@ class Consultas {
             die($e->getMessage());
         }
     }
+    
+    //Verificar existencia de correos
+    public function VerificarCorreo($correo) {
+        try {
+            $resultado = array();
+            $stm = $this->conexion->prepare("SELECT * FROM usuarios where correo= '$correo'");
+            $stm->execute();
+
+            foreach ($stm->fetchAll(PDO::FETCH_OBJ) as $row) {
+                $datos = new Elementos();
+
+                $datos->__SET('idUsuarios', $row->idUsuarios);
+                $datos->__SET('nombres', $row->nombres);
+                $datos->__SET('apellidos', $row->apellidos);
+                $datos->__SET('celular', $row->celular);
+                $datos->__SET('correo', $row->correo);
+                $datos->__SET('contrasena', $row->contrasena);
+
+                $resultado[] = $datos;
+            }
+
+            return $resultado;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 
     
     //************************Eventos***************************************//
