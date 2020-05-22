@@ -266,12 +266,12 @@ if (isset($_REQUEST['operaciones'])) {
                     foreach ($modelo->VerificarCorreo($_REQUEST['txtPassOL']) as $row): 
                     
                     $contrasena = $row->__GET('contrasena');
-                    $nombre= $row->__GET('nombre')." ".$row->__GET('apellido');
+                    $nombre= $row->__GET('nombres')." ".$row->__GET('apellidos');
                     endforeach;
                     $destino = $_REQUEST['txtPassOL'];
                     $contenido = "Hola ".$nombre."\nAquí está tú contraseña: ".$contrasena;
                     
-                    mail($destino,"Contenido",$contenido);  
+                    mail($destino,"Recuperación de contraseña",$contenido);  
                     echo "<script>alert ('Felicidades, la operación se realizó con exito. Revise su email'.'$row->__GET('contrasena')'.);</script>";
                     header('Refresh: 0; URL= Login.php');
                 }else {
