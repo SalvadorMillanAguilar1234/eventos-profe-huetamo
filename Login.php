@@ -61,7 +61,7 @@ error_reporting(E_ALL ^ E_NOTICE);
                                 <!--  <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1">Remember me</label></div> -->
                             </div>   
                             <br>
-                            <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Ingresar</button></form><a class="forgot-password" href="#">¿Olvidaste la contraseña?</a></div>
+                            <button class="btn btn-primary btn-block btn-lg btn-signin" type="submit">Ingresar</button></form><a class="forgot-password" href="#" data-toggle="modal" data-target="#modalRecuperarC">¿Olvidaste la contraseña?</a></div>
                 </div>
 
 
@@ -75,6 +75,32 @@ error_reporting(E_ALL ^ E_NOTICE);
                 </div>          
             </div>
         </footer>
+        
+        <!-- Modal de recuperar contraseñao-->
+            <div class="modal left fade in" role="dialog" tabindex="-1" id="modalRecuperarC" aria-labelledby="modalChatLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5  style="float: left">Recuperar contraseña</h5>
+                            <div class="col-9 col-lg-9 col-xl-9 padMar text-right">
+                                <h5 style="float: right" class="text-primary padMar margenesCajas pointer" data-dismiss="modal"><i class="icon ion-android-arrow-dropleft"></i>&nbsp; Ocultar</h5>
+                            </div><button type="button" class="close d-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">Ã</span></button></div>
+                        <div class="modal-body">
+                            <form id="registrarEvento" method="post" action="?operaciones=recuperarP" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label>Ingresa el correo electrónico con el que te registrastes en este sitio:</label>
+                                    <input type="text" class="form-control" id="txtPassOL" name="txtPassOL" placeholder="micorreo@gmail.com" required>
+                                    </div>
+                                <div  class="modal-footer" style="float: right">
+                                    <button type="button" class="btn btn-danger"  data-dismiss="modal" aria-label="Close">Cancelar</button>
+                                    <input type="submit" class="btn btn-primary mdi mdi-content-save"  value="Solicitar contraseña"> 
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
         <script src="assets/js/validaciones.js" type="text/javascript"></script>
         <script src="assets/js/jquery.min.js"></script>
         <script src="assets/bootstrap/js/bootstrap.min.js"></script>
